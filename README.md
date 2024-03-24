@@ -5,7 +5,6 @@
 - express
 - dotenv
 - pg
-- cors
 
 ## To create
 - gitignore (

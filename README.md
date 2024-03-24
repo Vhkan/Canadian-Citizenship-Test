@@ -1,4 +1,4 @@
-# Canadian Citizenship Test
+# 🍁Canadian Citizenship Test🍁
 
 
 ## Dependencies to install

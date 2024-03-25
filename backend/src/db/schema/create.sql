@@ -1,0 +1,24 @@
+DROP TABLE IF EXISTS Answers;
+DROP TABLE IF EXISTS Questions;
+DROP TABLE IF EXISTS Users;
+
+CREATE TABLE Users (
+  id SERIAL PRIMARY KEY NOT NULL,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT now()
+);
+
+CREATE TABLE Questions (
+  question_id SERIAL PRIMARY KEY NOT NULL,
+  question_text TEXT NOT NULL
+);
+
+CREATE TABLE Answers (
+  answer_id SERIAL PRIMARY KEY NOT NULL,
+  question_id INTEGER REFERENCES Questions(question_id) ON DELETE CASCADE,
+  answer_text TEXT NOT NULL,
+  is_correct BOOLEAN NOT NULL DEFAULT FALSE
+);

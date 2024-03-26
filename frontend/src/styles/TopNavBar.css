@@ -1,0 +1,29 @@
+.top-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3.5em;
+  width: 100vw;
+  background: linear-gradient(to bottom, #fb7351, rgb(243, 176, 95) 55%, rgb(241, 230, 205));
+  font-size: 1.4em;
+  font-weight: 500;
+  padding: 0;
+  margin: 0; 
+}
+
+.top-nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  margin-right: 3rem; 
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+.login-btn {
+  padding: 0.5rem 1rem;
+  margin-right: 3em; 
+}
+

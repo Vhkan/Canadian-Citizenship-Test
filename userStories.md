@@ -1,0 +1,16 @@
+## USER STORIES:
+- As a user, I can visit the main app page, click the "Start" button, and be able to go through the knowledge test.
+- As a user, I can click "Prev" or "Next" buttons during the test, and be able to go to the previous or next test question.
+- As a user, I can click the "Review later" checkbox and be able to skip the question and come back to it later during the test.
+- As a user, I can click the checkbox next to the test answer options, followed by the "Submit" button, and see if my answer was correct.
+- As a user, I can click the "Restart" button and be able to restart the test.
+- As a user, I can click "Home" and be redirected to the homepage.
+- As a user, I can click "Prepare" and be redirected to the "Canadian Citizenship" learning material.
+- As a user, I can click "About Us" and find information about the webpage.
+- As a user, I can click the "Login" button, fill in my email and password, followed by clicking on the "Login" button, and be able to log in to the page if I'm a registered user.
+- As a user, I can keep track of my test scores if I am logged in to the page.
+- As a user, I can register for the page by filling in my name, email, and password fields, followed by clicking on the "Register" button.
+- As a user, I should be able to see the test score and result after answering all 20 test questions.
+- As a user, I should be able to click the "book link" and be redirected to the test prep material if I failed the test.
+- As a user, I can click "Contact Us" and see the contact information.
+- As a user, I can click on the "Facebook", "Instagram", "YouTube" icons and be redirected to the mentioned pages.

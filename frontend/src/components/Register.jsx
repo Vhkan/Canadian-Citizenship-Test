@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 //Toast package for user notifications
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 const Register = () => {
 

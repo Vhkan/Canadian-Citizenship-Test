@@ -38,7 +38,6 @@ const Login = () => {
   
     if(!response.ok) {
       setErrorMessage(data.message);
-      navigate("/register")
     } else {
        localStorage.setItem("token", data.token);
        setErrorMessage("");
@@ -65,5 +64,7 @@ const Login = () => {
     </div>
   );
 };
+
+//Modify login functionality: when a user is logged in, display logged in as username
 
 export default Login;

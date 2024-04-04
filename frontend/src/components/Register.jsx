@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { generatePath, useNavigate } from "react-router-dom";
 //Toast package for user notifications
 // import { toast } from 'react-toastify';
 
@@ -17,24 +18,62 @@ const Register = () => {
   const handlePassword = (e) => setPassword(e.target.value);
 
   const [errorMessage, setErrorMessage ] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const handleRegisterSubmit = (e) => {
+  //redirection 
+  const navigate = useNavigate();
+
+  const handleRegisterSubmit = async (e) => {
     e.preventDefault();
+    
     if(!username || !firstName || !lastName || !email || !password) {
       setErrorMessage('Please, fill in all the fields to register!')
-    } else {
-      setErrorMessage(""); //clear the error message
+      return; //stop execution when validation fails
     }
 
-    console.log({ username, firstName, lastName, email, password });
-    
-    //Clear the fields
-    setUsername("");
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setPassword("");
+    const userRegData = { username, firstName, lastName, email, password };
+
+    try {
+      const URL = "http://localhost:9000/register";
+      const settings = {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(userRegData)
+      };
+      const response = await fetch(URL, settings);
+
+      if(!response.ok) {
+        throw new Error("Registrations is failed. Try again!")
+      }
+
+      const result = await response.json();
+      console.log("Registration result:", result);
+
+      //Successfull registration
+      setSuccessMessage('Successfull Registration!');
+      setErrorMessage("");
+
+      //Redirecting a new registered user to the login page
+      setTimeout(() => {
+        navigate('/login')
+      }, 4000);
+      
+      //Clear the fields
+      setUsername("");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
+      
+    } catch (error) {
+      console.log("registration failed!", error);
+      setErrorMessage('Registration failed. Please try again.');
+    }
+    console.log("New user:",{ username, firstName, lastName, email, password });
   };
+  
 
   
   return (
@@ -68,6 +107,7 @@ const Register = () => {
         </div>
 
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+        {successMessage && <p style={{color: 'green'}}>{successMessage}</p>}
 
         <button>Register</button>
       </form>

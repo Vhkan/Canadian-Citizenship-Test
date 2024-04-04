@@ -12,13 +12,13 @@ userController.post("/login", (req, res) => {
   Users.getUser([email])
     .then((result) => {
       if (result.rows.length === 0) {
-        return res.status(404).json({ message: "User not found!" });
+        return res.status(404).json({ message: "Invalid user credentials!" });
       }
       // return res.json(result.rows[0]);
       bcrypt.compare(password, result.rows[0].password)
       .then((bcryptResult) => {
         if (!bcryptResult) {
-          return res.status(400).json({ message: "Invalid credentials!" });
+          return res.status(400).json({ message: "Invalid user credentials!" });
         }
 
         //Storing token information

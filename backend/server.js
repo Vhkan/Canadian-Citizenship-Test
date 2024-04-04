@@ -4,6 +4,7 @@ const app = express();
 const cors = require('cors');
 const PORT = process.env.PORT || 9000;
 const userController = require('./controllers/userController');
+const registerUserController = require('./controllers/registerUserController');
 //const qaController = require('./src/controllers/qaController');
 
 app.use(express.json());
@@ -12,6 +13,7 @@ app.use(cors());
 
 //Routes/Endpoints
 app.use(userController);  
+app.use(registerUserController);
 //app.use(qaController);
 
 

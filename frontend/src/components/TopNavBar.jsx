@@ -1,4 +1,5 @@
 import '../styles/TopNavBar.css'
+import { Link } from 'react-router-dom'
 
 export default function TopNavBar() {
   return (
@@ -9,7 +10,7 @@ export default function TopNavBar() {
         <a href="/" className='nav-link'>Prepare</a>
         <a href="/"className='nav-link'>About</a>
       </div>
-      <button className='login-btn'>Login</button>
+      <Link to="/login" className="login-btn">Login</Link>
     </div>
   )
 }

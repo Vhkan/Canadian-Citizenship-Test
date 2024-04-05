@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const Test = () => {
 
-  const [question, setQuestion] = useState(null);
+  const [questionAnswer, setQuestionAnswer] = useState(null);
   const [loading, setLoading] = useState(true);
 
   //Fetching questions from the server
@@ -14,7 +14,7 @@ const Test = () => {
           throw new Error('Fetching data from DB failed.');
         }
         console.log('Data received:', response.data); //Loggin the received data
-        setQuestion(response.data); //Setting the randomly selected question
+        setQuestionAnswer(response.data); //Setting the randomly selected question
         setLoading(false); //Setting loading to false when data is received
       })
       .catch(error => {
@@ -32,7 +32,12 @@ const Test = () => {
     <div>
         <div>
            <h3>Question:</h3>
-           <p>{question.question_text}</p>
+           <p>{questionAnswer.question_text}</p>
+           <h3>Answers:</h3>
+           <p>{questionAnswer.answer_text}</p>
+           <p>{questionAnswer.answer_text}</p>
+           <p>{questionAnswer.answer_text}</p>
+           <p>{questionAnswer.answer_text}</p>
         </div>  
     </div>
   )

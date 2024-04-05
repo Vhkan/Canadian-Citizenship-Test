@@ -38,7 +38,7 @@ export default function TopNavBar() {
       <div className='top-nav-links'>
         <a href="/" className='nav-link'>Home</a>
         <a href="/prepare" className='nav-link'>Prepare</a>
-        <a href="/"className='nav-link'>About</a>
+        <a href="/about"className='nav-link'>About</a>
         <a href="/test"className='nav-link'>Test</a>
         </div>
       {isLoggedIn ? (

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import Test from './components/Test';
+import Prepare from './components/Prepare';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register/>}/>
             <Route path='/test' element={<Test/>}/>
+            <Route path='/prepare' element={<Prepare/>}/>
           </Routes>
         </div>
       </div>

@@ -37,8 +37,9 @@ export default function TopNavBar() {
       <a href="/">🍁Canadian Citizenship Test</a>
       <div className='top-nav-links'>
         <a href="/" className='nav-link'>Home</a>
-        <a href="/" className='nav-link'>Prepare</a>
+        <a href="/prepare" className='nav-link'>Prepare</a>
         <a href="/"className='nav-link'>About</a>
+        <a href="/test"className='nav-link'>Test</a>
         </div>
       {isLoggedIn ? (
         <div>

@@ -31,14 +31,15 @@ const Test = () => {
   return (
     <div>
         <div>
-           <h3>Question:</h3>
+           <h3>Question 1 of 20</h3>
            <p>{questionAnswer.question_text}</p>
            <h3>Answers:</h3>
            <ul>
            <p>{questionAnswer.answers.map(answer => (
-            <li key={answer.answer_id}> {answer.answer_text} </li>
+            <li key={answer.answer_id}> {answer.answer_text}   </li>
            ))}</p>
            </ul>
+           <button>Previous Question</button> <button> Next Question</button>
         </div>  
     </div>
   )

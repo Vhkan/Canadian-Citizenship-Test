@@ -5,7 +5,7 @@ VALUES
 (1, 'When is Remembrance Day celebrated?',1),
 (2, 'What is the highest military honour a Canadian can receive?',3),
 (3, 'What is a Francophone?',1),
-(1, 'From where does the name “Canada” come from?',,2),
+(1, 'From where does the name “Canada” come from?',2),
 (3, 'Give an example of where English and French have equal status in Canada.',3),
 (2, 'How does a bill become a law?',3),
 (5, 'Name a responsibility of citizenship.',1),

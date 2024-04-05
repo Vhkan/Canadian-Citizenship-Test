@@ -1,4 +1,4 @@
-INSERT INTO questions (category_id, question_text, difficulty)
+INSERT INTO Questions (category_id, question_text, difficulty)
 VALUES
 (1, 'Who are the Métis?', 3),
 (2, 'Which party becomes the Official Opposition?',2),

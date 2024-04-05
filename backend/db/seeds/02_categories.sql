@@ -1,7 +1,7 @@
-INSERT INTO categories (name)
+INSERT INTO Categories (category_name)
 VALUES
 ('Canadian Identity and History'),
-('Canadian Government amd Politics'),
+('Canadian Government and Politics'),
 ('Cultural and Linguistic Diversity'),
 ('Geography'),
 ('Legal Rights and Responsibilities'),

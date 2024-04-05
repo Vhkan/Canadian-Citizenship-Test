@@ -1,4 +1,4 @@
-INSERT INTO answers (question_id, answer_text, is_correct)
+INSERT INTO Answers (question_id, answer_text, is_correct)
 VALUES
 (1, 'A distinct people of mixed Aboriginal and European ancestry.', true),
 (1, 'Indigenous people from South America.', false),

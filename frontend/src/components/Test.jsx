@@ -34,10 +34,11 @@ const Test = () => {
            <h3>Question:</h3>
            <p>{questionAnswer.question_text}</p>
            <h3>Answers:</h3>
-           <p>{questionAnswer.answer_text}</p>
-           <p>{questionAnswer.answer_text}</p>
-           <p>{questionAnswer.answer_text}</p>
-           <p>{questionAnswer.answer_text}</p>
+           <ul>
+           <p>{questionAnswer.answers.map(answer => (
+            <li key={answer.answer_id}> {answer.answer_text} </li>
+           ))}</p>
+           </ul>
         </div>  
     </div>
   )

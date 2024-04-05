@@ -6,7 +6,7 @@ const testController = express.Router();
 
 testController.get("/test", async (req, res) => {
   try {
-    const randomQuestion = await Questions.getRandomQuestionAnswer();
+    const randomQuestion = await Questions.getRandomQuestionAnswer(); 
     if(!randomQuestion) {
       return res.status(404).json({error: "No question found!" })
     }

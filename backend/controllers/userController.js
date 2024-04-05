@@ -24,6 +24,7 @@ userController.post("/login", (req, res) => {
         //Storing token information
         const payload = {
           id: result.rows[0].user_id,
+          username: result.rows[0].username,
           email: result.rows[0].email,
           first_name: result.rows[0].first_name,
           last_name: result.rows[0].last_name
@@ -32,7 +33,8 @@ userController.post("/login", (req, res) => {
           if(err) {
             return res.status(400).json({message: "Error generating a token!"});
           }
-          return res.json({token: token});
+            // Include username in the response data
+            return res.json({token: token, username: payload.username});
         });
 
       });

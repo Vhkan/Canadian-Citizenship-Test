@@ -15,9 +15,8 @@ const Login = () => {
 
   const loginHandler = (e) => {
     const newUserLogin = {
-      //keeping the previous user login info
-      ...userLogin,
-      [e.target.name]: e.target.value  //handling form inputs dynamically
+      //keeping the previous userlogin info
+      ...userLogin, [e.target.name]: e.target.value  //handling form inputs dynamically
     }
     setUserLogin(newUserLogin);
   };
@@ -33,17 +32,26 @@ const Login = () => {
       body: JSON.stringify(userLogin)
     };
 
+    try {
     const response = await fetch(URL, settings); //settings obj to keep the info typed
     const data = await response.json();
-  
+    console.log("Data object (token info):", data);
+
     if(!response.ok) {
-      setErrorMessage(data.message);
-    } else {
+      throw new Error(data.message || "An error occurred during login.");
+    } 
+    //savin token and username to local storage
        localStorage.setItem("token", data.token);
+       localStorage.setItem("user", JSON.stringify({ username: data.username }));
        setErrorMessage("");
-       navigate("/test");
+      //  navigate("/test");
+      navigate("/test", { replace: true, state: { loggedIn: true } });
+
+    } catch(error) {
+      setErrorMessage(error.message);
     }
-  }
+  };
+
   
   return (
     <div>
@@ -59,7 +67,7 @@ const Login = () => {
           <input id="password" type="password" name="password" value={userLogin.password} onChange={loginHandler} />
         </div>
         <div>{errorMessage}</div>
-        <button>Login</button>
+        <button className="login-btn">Login</button>
       </form>
     </div>
   );

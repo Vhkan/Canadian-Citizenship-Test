@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { generatePath, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 //Toast package for user notifications
 // import { toast } from 'react-toastify';
 

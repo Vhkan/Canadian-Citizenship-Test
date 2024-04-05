@@ -10,6 +10,8 @@
 - pg
 - bcrypt
 - jwt
+- axios
+- cors
 
 
 - FR => npm run dev

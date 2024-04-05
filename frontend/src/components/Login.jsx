@@ -55,7 +55,7 @@ const Login = () => {
   
   return (
     <div>
-      <h3>Login</h3>
+      <h3>Login if you are a registered user👇</h3>
       <form onSubmit={handleLogin}>
         <div>
           <label htmlFor="email">Email⚡</label>
@@ -68,11 +68,12 @@ const Login = () => {
         </div>
         <div>{errorMessage}</div>
         <button className="login-btn">Login</button>
+        <h3>Register here 👇</h3>
+        <button onClick={() => navigate("/register")} className="register-btn">Register</button>
       </form>
     </div>
   );
 };
 
-//Modify login functionality: when a user is logged in, display logged in as username
 
 export default Login;

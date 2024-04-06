@@ -7,9 +7,7 @@ import Test from './components/Test';
 import Prepare from './components/Prepare';
 import About from './components/About';
 import MainPage from './components/MainPage';
-// import NavigateTest from './components/NavigateTest';
-// import StudyGuide from './components/StudyGuide';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {

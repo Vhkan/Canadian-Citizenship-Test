@@ -3,6 +3,7 @@
 
 PGHOST=localhost
 PGUSER=labber
-PGDATABASE=canadian_citizenship_test
+PGDATABASE=canadian_citizenship
 PGPASSWORD=labber
 PGPORT=5432
+

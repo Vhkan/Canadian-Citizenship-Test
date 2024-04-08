@@ -11,7 +11,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: url("../public/flat-lay-maple-autumn-leaves-border\ \(1\).jpg");
-  background-size: cover;
+  /* background-size: cover; */
   background-repeat: no-repeat;
 }
 

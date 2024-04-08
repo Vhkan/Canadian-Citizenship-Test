@@ -27,3 +27,12 @@
   margin-right: 3em; 
 }
 
+.loggedIn {
+  font-size: 0.7em;
+  color: white;
+  padding-right: 1em;
+}
+
+.logout-btn {
+  margin-right: 1em;
+}

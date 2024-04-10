@@ -5,7 +5,7 @@ const cors = require('cors');
 const PORT = process.env.PORT || 9000;
 const userController = require('./controllers/userController');
 const registerUserController = require('./controllers/registerUserController');
-//const qaController = require('./src/controllers/qaController');
+const testController = require('./controllers/testController');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -14,7 +14,7 @@ app.use(cors());
 //Routes/Endpoints
 app.use(userController);  
 app.use(registerUserController);
-//app.use(qaController);
+app.use(testController);
 
 
 app.get('/', (req, res) => {

@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const Users = require("../models/userModel");
 const SECRET = "this_is_real_secret";
 const validateToken = require('../middlewares/validateToken');
+
 const userController = express.Router();
 
 userController.post("/login", (req, res) => {

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
 
 const Login = () => {
 
@@ -67,9 +68,9 @@ const Login = () => {
           <input id="password" type="password" name="password" value={userLogin.password} onChange={loginHandler} />
         </div>
         <div>{errorMessage}</div>
-        <button className="login-btn">Login</button>
+        <Button type="submit" className="login-btn">Login</Button>
         <h3>Register here 👇</h3>
-        <button onClick={() => navigate("/register")} className="register-btn">Register</button>
+        <Button onClick={() => navigate("/register")} className="register-btn">Register</Button>
       </form>
     </div>
   );

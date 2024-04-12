@@ -9,10 +9,14 @@ const Test = () => {
   const [loading, setLoading] = useState(true);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [result, setResult] = useState(null);
- 
+  const [remainingQuestions, setRemainingQuestions] = useState(20);
 
   //Fetching questions from the server
   useEffect(() => {
+    fetchQuestions();
+  }, []);
+
+  const fetchQuestions = () => {
     axios.get("http://localhost:9000/test")
       .then(response => {
         if (!response.data) {
@@ -26,7 +30,7 @@ const Test = () => {
         console.error('Error fetching question:', error);
         setLoading(false); //Setting loading to false on error
       });
-  }, []);
+  };
 
 
   //Handling the user's answer selection (radio button)
@@ -41,9 +45,12 @@ const Test = () => {
     console.log("Correct answer is:", correctAnswer);
     if(selectedAnswer === correctAnswer) {
       setResult("Correct answer!");
+      fetchQuestions();
     } else {
       setResult("Incorrect answer!");
     }
+    //Decrease question count
+   setRemainingQuestions(prevCount => prevCount - 1); 
   };
   
   //In case the no data is fetched from the DB
@@ -55,7 +62,7 @@ const Test = () => {
   return (
     <div>
         <div>
-           <h3>Question 1 of 20</h3>
+           <h3>Question {21 - remainingQuestions} of 20</h3>
            <p>{questionAnswer.question_text}</p>
            <h3>Answers:</h3>
 
@@ -73,9 +80,11 @@ const Test = () => {
            ))}
           </Form>
           <div>
-           <button>Previous Question</button> <button> Next Question</button>
+          <Button variant="outline-success" onClick={handleSubmit}>Submit Answer</Button> 
+          <Button variant="outline-warning">Skip Question</Button>
+          {result && <p>{result}</p>}
           </div>
-          <Button variant="outline-success" onClick={handleSubmit}>Submit Answer</Button>{result && <p>{result}</p>}
+          
         </div>  
     </div>
   );

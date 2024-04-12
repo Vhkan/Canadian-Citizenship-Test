@@ -12,6 +12,7 @@
 - jwt
 - axios
 - cors
+- react-bootstrap
 
 
 - FR => npm run dev

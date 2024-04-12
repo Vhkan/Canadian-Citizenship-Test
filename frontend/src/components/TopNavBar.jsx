@@ -1,6 +1,7 @@
 import '../styles/TopNavBar.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Button from 'react-bootstrap/Button';
 
 
 export default function TopNavBar() {
@@ -44,10 +45,10 @@ export default function TopNavBar() {
       {isLoggedIn ? (
         <div>
           <span className='loggedIn'>Logged in as {username}</span>
-          <button onClick={handleLogout} className="logout-btn">Logout</button>
+          <Button onClick={handleLogout} className="logout-btn">Logout</Button>
         </div>
       ) : (
-        <button onClick={() => navigate("/login")} className="login-btn">Login</button>
+        <Button onClick={() => navigate("/login")} className="login-btn">Login</Button>
       )}
     </div>
   )

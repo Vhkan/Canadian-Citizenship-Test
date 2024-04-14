@@ -3,7 +3,7 @@ import React from "react";
 const Prepare = () => {
   return (
     <div>
-      <p>Prepare Page is going to be here with the test prep material.</p>
+      <h2>Prepare for the Citizenship Test.</h2>
       <h4>Discover Canada Study Guide</h4>
       <p>Discover Canada: Read online: <a href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/publications-manuals/discover-canada/read-online.html" target="_blank">Study Guide – Discover Canada</a></p>
       <h4>Check out if you are ready for an exam by following down the test link below👇</h4>

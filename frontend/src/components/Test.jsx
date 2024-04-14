@@ -41,10 +41,10 @@ const Test = () => {
   //Fetching questions from the server
   useEffect(() => {
     const totalQuestionsToAnswer = 20;
-    const questionsAnsweredOrSkipped = totalQuestionsAnswered - skippedQuestions.length;
-    if (questionsAnsweredOrSkipped < totalQuestionsToAnswer) {
+    const currentQuestionsAnswered = totalQuestionsAnswered - skippedQuestions.length;
+    if (currentQuestionsAnswered < totalQuestionsToAnswer) {
       fetchQuestions();
-    } else if (skippedQuestions.length > 0 && questionsAnsweredOrSkipped < totalQuestionsToAnswer + skippedQuestions.length) {
+    } else if (skippedQuestions.length > 0 && currentQuestionsAnswered < totalQuestionsToAnswer + skippedQuestions.length) {
       setQuestionAnswer(null);
       setAnsweredQuestions(0);
       setLoading(false);
@@ -169,37 +169,45 @@ const Test = () => {
   if (correctAnswers + incorrectAnswers.length === 20) {
     const testResult = determineTestResult();
   
-      return (
-        <div>
-          <h1>Test Completed!</h1>
-          <p> <b>Number of Correct Answers:</b> {correctAnswers} </p>
-          <p><b>Number of Incorrect Answers:</b> {incorrectAnswers.length}</p>
-
-          {/* IF NO PASS => SHOW LINK TO STUDY GUIDE || PASS => CONGRATULATIONS + TEST SCORE */}
-          <p><b>Test Result:</b> {testResult}</p>
-
-          {/* skipped questions id are shown */}
-          <p><b>Skipped Questions:</b> {skippedQuestions.map(q => `${q.question_id}: ${q.question_text}`).join(', ')}</p>
-
-          {/* Display incorrectly answered questions */}
-          <p><b>Questions answered incorrectly👇</b></p>
-          {incorrectAnswers.map((incorrect, index) => (
-            <div key={index} style={{ marginBottom: '50px' }}>
-              <p><b>Question ID:</b> {incorrect.question_id}</p>
-              <p><b>Question:</b> {incorrect.question_text}</p>
-              <p><b>Your Answer:</b>{incorrect.user_answer}</p>
-              <p><b>Correct Answer:</b> {incorrect.correct_answer}</p>
-        </div>
-      ))}
-
-          {/* A link to Learning Material will be here */}
-          <h4>Review the Discover Canada Study Guide</h4>
-          <p>Discover Canada: Read online: <a href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/publications-manuals/discover-canada/read-online.html" target="_blank">Study Guide – Discover Canada</a></p>
-          
-          {/* <Button onClick={() => navigate("/test")}>Start Over</Button> */}
-          <a href="/test"><b>Start The Test Over</b></a>
-        </div>
-      )
+    return (
+      <div>
+        <h1>Test Completed!</h1>
+        <p><b>Number of Correct Answers:</b> {correctAnswers} </p>
+        <p><b>Number of Incorrect Answers:</b> {incorrectAnswers.length}</p>
+    
+        {/* Determine the test result message */}
+        {testResult === 'Passed!' ? (
+          <div>
+            <h2>🎆Congratulations!🎆</h2>
+            <p><b>Test Result:</b> {testResult}</p>
+          </div>
+        ) : (
+          <div>
+            <h2>Try better next time!</h2>
+            <p><b>Test Result:</b> {testResult}</p>
+            <h4>Review the Discover Canada Study Guide</h4>
+            <p>Find the Discover Canada Study Guide here: <a href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/publications-manuals/discover-canada/read-online.html" target="_blank">Study Guide – Discover Canada</a></p>
+          </div>
+        )}
+    
+        {/* Skipped questions */}
+        {/* <p><b>Skipped Questions:</b> {skippedQuestions.map(q => `${q.question_id}: ${q.question_text}`).join(', ')}</p> */}
+    
+        {/* Display incorrectly answered questions */}
+        <h3>Questions answered incorrectly👇</h3>
+        {incorrectAnswers.map((incorrect, index) => (
+          <div key={index} style={{ marginBottom: '50px' }}>
+            <p><b>Question ID:</b> {incorrect.question_id}</p>
+            <p><b>Question:</b> {incorrect.question_text}</p>
+            <p><b>Your Answer:</b> {incorrect.user_answer}</p>
+            <p><b>Correct Answer:</b> {incorrect.correct_answer}</p>
+          </div>
+        ))}
+    
+        {/* Start the test over link */}
+        <a href="/test"><b>Start The Test Over</b></a>
+      </div>
+    );
   }
 
   //Rendering skipped questions if any

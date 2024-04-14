@@ -223,7 +223,7 @@ const Test = () => {
         <h3>Skipped Questions:</h3>
         {skippedQuestions.map((question, index) => (
           <div key={index}>
-          <h3> Skipped Question {index + 1}</h3>
+          <h5> Skipped Question {index + 1}</h5>
           <p>{question.question_text}</p>
           <Form>
            {question.answers && question.answers.map(answer => (

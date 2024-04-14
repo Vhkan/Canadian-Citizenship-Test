@@ -9,7 +9,7 @@ function MainPage() {
       Learn about Canada's history, values, government and symbols with 80+ interactive lessons, quizzes and tests.</p>
       <StudyGuide/>
       <h4>Pass the Canadian Citizenship Test Today!</h4>
-    <NavigateTest/>
+      <NavigateTest/>
   </div>
   )
 }

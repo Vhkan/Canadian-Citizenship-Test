@@ -5,7 +5,6 @@ import Button from 'react-bootstrap/Button';
 // import { useNavigate } from "react-router-dom";
 
 
-
 const Test = () => {
   //Setttign q/a to [] to keep track of the q/a progress
   const [questionAnswer, setQuestionAnswer] = useState(null);
@@ -19,8 +18,24 @@ const Test = () => {
   const [skippedQuestions, setSkippedQuestions] = useState([]);
   const [skipsCount, setSkipsCount] = useState(3);
   const [showSkippedQuestions, setShowSkippedQuestions] = useState(false);
-  
-  // const navigate = useNavigate();
+  const [useSkipped, setUseSkipped] = useState(false);// controlling the q/a regular/skipped
+
+ 
+  //Total questions answered (correct + icorrect)
+  const totalQuestionsAnswered = correctAnswers + incorrectAnswers.length;
+
+   //Handling skips
+  //Moved the "test finished" condition from handleSkippedQuestions to a useEffect 
+  //and fetch the skipped questions once the test is over
+  useEffect(() => {
+    if (totalQuestionsAnswered === 17 && skippedQuestions.length === 3 && skipsCount === 0) {
+      setShowSkippedQuestions(true);
+      fetchSkippedQA();  
+      setUseSkipped(true);     
+    } else {
+      fetchQuestions();
+    }
+  }, [skipsCount, skippedQuestions, totalQuestionsAnswered]);
 
 
   //Fetching questions from the server
@@ -85,27 +100,26 @@ const Test = () => {
 
   //Handling user's answer submit
   const handleSubmit = () => {
-    //Prevent submitting without a selected answer
-    if (!selectedAnswer) return;
+    if (!selectedAnswer || !questionAnswer || !questionAnswer.answers) return; //Prevent submitting without a selected answer
 
     //Checking if the answer was chosen is correct
-    const correctAnswer = questionAnswer.answers.find(answer => answer.is_correct).answer_id.toString();
-    console.log("Correct answer ID is:", correctAnswer);
+    const correctAnswer = questionAnswer.answers.find(answer => answer.is_correct)?.answer_id.toString();
+    const correctSkippedAnswer = skippedQuestions.length > 0 ? skippedQuestions[0].answers.find(answer => answer.is_correct)?.answer_id.toString() : null;
 
-    // Find the answer object corresponding to the selectedAnswer ID
-  const selectedAnswerObject = questionAnswer.answers.find(answer => answer.answer_id.toString() === selectedAnswer);
-  // Get the answer text from the selectedAnswerObject
-  const selectedAnswerText = selectedAnswerObject ? selectedAnswerObject.answer_text : "User answer not found";
+    const selectedAnswerObject = questionAnswer.answers.find(answer => answer.answer_id.toString() === selectedAnswer);
+    const selectedAnswerText = selectedAnswerObject ? selectedAnswerObject.answer_text : "User answer not found";
 
+     //Find the answer object corresponding to the selectedAnswer ID
+     const correctAnswerId = useSkipped ? correctSkippedAnswer : correctAnswer;
 
-    if(selectedAnswer === correctAnswer) {
+    if(selectedAnswer === correctAnswerId) {
       setResult("Correct answer!");
       setCorrectAnswers(prev => prev + 1)
     } else {
       setResult("Incorrect answer!");
 
-      //Set incorrectly answered question by user: icorrQuestion + incorrAnswer + corrAnswer to say later in the test result: 
-      //Correct Answer is: correct answer 
+      //Set incorrectly answered question by user: 
+      //icorrQuestion + incorrAnswer + corrAnswer for test result: 
       setIncorrectAnswers(prev => [
         ...prev,
         {
@@ -119,8 +133,7 @@ const Test = () => {
       console.log("Incorrect answer IDs is:", [...incorrectAnswers, questionAnswer.question_id, incorrectAnswers]);
     }
     setAnsweredQuestions(prev => prev + 1);
-    //Reset selection for the next question
-    setSelectedAnswer(null);
+    setSelectedAnswer(null); //Reset selection for the next question
     setTimeout(() => {
       setResult(null);
       fetchQuestions();
@@ -129,34 +142,30 @@ const Test = () => {
 
     //Handling skip question clicks
     const handleSkippedQuestion = () => {
-    //disable the button clicks
-     if (skipsCount <= 0 || !questionAnswer) return;
-    //Decrement skips count
-      setSkipsCount(prev => prev - 1);
+     if (skipsCount <= 0 || !questionAnswer) return; //disable the button clicks
+   
+      setSkipsCount(prev => prev - 1);  //Decrement skips count
       //saves the id's of scipped questions to pull them out at the end of the test
-      setSkippedQuestions(prev => [...prev, questionAnswer.question_id]);
+      if(questionAnswer && questionAnswer.answers) {
+      setSkippedQuestions(prev => [...prev, questionAnswer]);
       console.log('Skipped Questions ids from handleSkippedQuestions func are:', [...skippedQuestions, questionAnswer.question_id]);
-      //(skippedQuestions.length === 3 && answeredQuestions < 17 && skipsCount === 0)
-      if (answeredQuestions === 17 && skippedQuestions.length === 3 && skipsCount === 0) {
-        setShowSkippedQuestions(true);
-        fetchSkippedQA();       
-      } else {
-        fetchQuestions();
-      }
+      console.log("Answered question + skipsCount + questionAnswer", answeredQuestions, skipsCount, questionAnswer); 
+      }   
     }; 
 
-    // Determining test result
-  const determineTestResult = () => {
-  const totalQuestionsAnswered = correctAnswers + incorrectAnswers.length;
-  const incorrectAnswersCount = incorrectAnswers.filter(answer => answer.user_answer !== answer.correct_answer).length;
-  const passed = correctAnswers >= 16 && totalQuestionsAnswered === 20 && incorrectAnswersCount <= 4;
-  return passed ? "Passed!" : "Failed!";
-};
+    
+    //Determining test result
+    const determineTestResult = () => {
+    //const totalQuestionsAnswered = correctAnswers + incorrectAnswers.length;
+    const incorrectAnswersCount = incorrectAnswers.filter(answer => answer.user_answer !== answer.correct_answer).length;
+    const passed = correctAnswers >= 16 && totalQuestionsAnswered === 20 && incorrectAnswersCount <= 4;
+    return passed ? "Passed!" : "Failed!";
+  };
 
     
   
   //In case the no data is fetched from the DB
-    if (loading) return <p>Loading...</p>;
+  if (loading) return <p>Loading...</p>;
 
   //For testing purposes: show the test score. Later will be resirect to a new (score/results) page
   if (correctAnswers + incorrectAnswers.length === 20) {
@@ -201,7 +210,10 @@ const Test = () => {
   //Rendering skipped questions if any
   console.log("Rendering skipped questions, showSkippedQuestions:", showSkippedQuestions);
   console.log(" Rendering skipped questions, skippedQuestions.length:", skippedQuestions.length);
-  if(showSkippedQuestions && skippedQuestions.length > 0) {
+  
+  const currentSkippedQuestion = skippedQuestions[0];
+  console.log("Current skipped question:", currentSkippedQuestion);
+  if(showSkippedQuestions && skippedQuestions.length === 3) {
     return (
       <div>
         <h3>Skipped Questions:</h3>
@@ -222,13 +234,14 @@ const Test = () => {
             />
            ))}
           </Form>
+          <Button variant="outline-success" onClick={handleSubmit}>Submit Answer</Button>
           </div>
         ))}
       </div>
     )
   }
 
-
+  //Rendering questions/answers
   return (
     <div>
         <div>

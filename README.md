@@ -13,6 +13,10 @@
 - axios
 - cors
 - react-bootstrap
+- fontawesome-svg-core
+- free-brands-svg-icons
+- react-fontawesome
+
 
 
 - FR => npm run dev

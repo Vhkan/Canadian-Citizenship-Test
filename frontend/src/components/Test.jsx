@@ -20,6 +20,8 @@ const Test = () => {
   const [showSkippedQuestions, setShowSkippedQuestions] = useState(false);
   const [useSkipped, setUseSkipped] = useState(false);// controlling the q/a regular/skipped
 
+
+  const [currentSkippedIndex, setCurrentSkippedIndex] = useState(0);
  
   //Total questions answered (correct + icorrect)
   const totalQuestionsAnswered = correctAnswers + incorrectAnswers.length;
@@ -66,29 +68,45 @@ const Test = () => {
           console.error('Error fetching question:', error);
           setLoading(false); //Setting loading to false on error
         });
-      }
+      };
 
   //Fetching the skipped questions from a DB
-  const fetchSkippedQA = () => {
-    axios.post("http://localhost:9000/test", { questionIds: skippedQuestions })
-    .then(response => {
-      if(!response.data) {
-        throw new Error('Fetching skipped QA from DB failed.');
-      } 
-      //Handling fetched skipped questions by setting to skippedQuestions
-      setSkippedQuestions(response.data);
-      console.log("skippedQA data from fetchSkippedQA is (response.data):", response.data);
+  const fetchSkippedQA = async () => {
+    try {
+      // Fetch each skipped question one at a time
+      for (let i = 0; i < skippedQuestions.length; i++) {
+        // const questionId = skippedQuestions[i];
+        const response = await axios.post("http://localhost:9000/test", { questionIds: [skippedQuestions[currentSkippedIndex]]  });
+        if (!response.data) {
+          throw new Error(`Fetching skipped QA with ID ${skippedQuestions[i]} from DB failed.`);
+        }
+        // Update skippedQuestions state with the fetched question
+        setSkippedQuestions(prev => {
+          const updatedQuestions = [...prev];
+          updatedQuestions[currentSkippedIndex] = response.data;
+          return updatedQuestions;
+        });
+      }
       setShowSkippedQuestions(true);
-      //After fetching skipped questions, set useSkipped to true
-      setTimeout(() => {
-        setUseSkipped(true);
-      }, 0);
-    })
-    .catch(error => {
-      console.log("Error fetching skipped QA from DB is:", error);
-    });
+      setUseSkipped(true);
+    } catch (error) {
+      console.log("Error fetching skipped QA from DB:", error);
+    }
   };
-
+  //Next question
+  const handleNextQuestion = () => {
+    if (currentSkippedIndex < skippedQuestions.length - 1) {
+      setCurrentSkippedIndex(prevIndex => prevIndex + 1);
+      fetchSkippedQA();
+    }
+  };
+  //Prev question
+  const handlePreviousQuestion = () => {
+    if (currentSkippedIndex > 0) {
+      setCurrentSkippedIndex(prevIndex => prevIndex - 1);
+      fetchSkippedQA();
+    }
+  };
 
   //Handling the user's answer selection (radio button)
   const handleAnswerChange = (e) => {
@@ -139,28 +157,27 @@ const Test = () => {
     }, 0);
   };
 
-    //Handling skip question clicks
-    const handleSkippedQuestion = () => {
-     if (skipsCount <= 0 || !questionAnswer) return; //disable the button clicks
-      setSkipsCount(prev => prev - 1);  //Decrement skips count
-      //saves the id's of scipped questions to pull them out at the end of the test
-      if(questionAnswer && questionAnswer.answers) {
-      setSkippedQuestions(prev => [...prev, questionAnswer]);
-      console.log('Skipped Questions Objects + AnswerIds from handleSkippedQuestions func are:', [...skippedQuestions, questionAnswer.question_id]);
-      console.log("Answered question + skipsCount + questionAnswer", answeredQuestions, skipsCount, questionAnswer); 
-      }   
-    }; 
+  //Handling skip question clicks
+  const handleSkippedQuestion = () => {
+    if (skipsCount <= 0 || !questionAnswer) return; //disable the button clicks
+    setSkipsCount(prev => prev - 1);  //Decrement skips count
+    //saves the id's of scipped questions to pull them out at the end of the test
+    if(questionAnswer && questionAnswer.answers) {
+    setSkippedQuestions(prev => [...prev, questionAnswer]);
+    console.log('Skipped Questions Objects + AnswerIds from handleSkippedQuestions func are:', [...skippedQuestions, questionAnswer.question_id]);
+    console.log("Answered question + skipsCount + questionAnswer", answeredQuestions, skipsCount, questionAnswer); 
+    }   
+  }; 
 
-    
-    //Determining test result
-    const determineTestResult = () => {
-    //const totalQuestionsAnswered = correctAnswers + incorrectAnswers.length;
-    const incorrectAnswersCount = incorrectAnswers.filter(answer => answer.user_answer !== answer.correct_answer).length;
-    const passed = correctAnswers >= 16 && totalQuestionsAnswered === 20 && incorrectAnswersCount <= 4;
-    return passed ? "Passed!" : "Failed!";
-  };
-
-    
+  
+  //Determining test result
+  const determineTestResult = () => {
+  //const totalQuestionsAnswered = correctAnswers + incorrectAnswers.length;
+  const incorrectAnswersCount = incorrectAnswers.filter(answer => answer.user_answer !== answer.correct_answer).length;
+  const passed = correctAnswers >= 16 && totalQuestionsAnswered === 20 && incorrectAnswersCount <= 4;
+  return passed ? "Passed!" : "Failed!";
+};
+  
   
   //In case the no data is fetched from the DB
   if (loading) return <p>Loading...</p>;
@@ -168,6 +185,9 @@ const Test = () => {
   //For testing purposes: show the test score. Later will be resirect to a new (score/results) page
   if (correctAnswers + incorrectAnswers.length === 20) {
     const testResult = determineTestResult();
+
+  // Check if there are skipped questions
+    // const hasSkippedQuestions = skippedQuestions.length > 0 && skipsCount < 3;
   
     return (
       <div>
@@ -197,7 +217,7 @@ const Test = () => {
         <h3>Questions answered incorrectly👇</h3>
         {incorrectAnswers.map((incorrect, index) => (
           <div key={index} style={{ marginBottom: '50px' }}>
-            <p><b>Question ID:</b> {incorrect.question_id}</p>
+            {/* <p><b>Question ID:</b> {incorrect.question_id}</p> */}
             <p><b>Question:</b> {incorrect.question_text}</p>
             <p><b>Your Answer:</b> {incorrect.user_answer}</p>
             <p><b>Correct Answer:</b> {incorrect.correct_answer}</p>
@@ -214,35 +234,29 @@ const Test = () => {
   console.log("Rendering skipped questions, showSkippedQuestions:", showSkippedQuestions);
   console.log(" Rendering skipped questions, skippedQuestions.length:", skippedQuestions.length);
   
-  const currentSkippedQuestion = skippedQuestions[0];
-  console.log("Current skipped question:", currentSkippedQuestion);
-  
-  if(showSkippedQuestions && totalQuestionsAnswered >= 17 && skippedQuestions.length <= 3 && skipsCount < 3) {
+  if (showSkippedQuestions && totalQuestionsAnswered >= 17 && skippedQuestions.length > 0 && skipsCount < 3) {
     return (
-      <div>
-        <h3>Skipped Questions:</h3>
-        {skippedQuestions.map((question, index) => (
-          <div key={index}>
-          <h5> Skipped Question {index + 1}</h5>
-          <p>{question.question_text}</p>
-          <Form>
-           {question.answers && question.answers.map(answer => (
-            <Form.Check 
-              key={answer.answer_id}
-              type='radio'
-              label={answer.answer_text}
-              name="answerOption"
-              id={`answer-${answer.answer_id}`}
-              value={answer.answer_id}
-              onChange={handleAnswerChange}
-            />
-           ))}
-          </Form>
-          <Button variant="outline-success" onClick={handleSubmit}>Submit Answer</Button>
-          </div>
+    <div>
+      <h3>Skipped Question {currentSkippedIndex + 1}</h3>
+      <p>{skippedQuestions[currentSkippedIndex]?.question_text}</p>
+      <Form>
+        {skippedQuestions[currentSkippedIndex]?.answers.map(answer => (
+          <Form.Check 
+            key={answer.answer_id}
+            type='radio'
+            label={answer.answer_text}
+            name="answerOption"
+            id={`answer-${answer.answer_id}`}
+            value={answer.answer_id}
+            onChange={handleAnswerChange}
+          />
         ))}
-      </div>
-    )
+        </Form>
+          <Button variant="outline-success" onClick={handleSubmit}>Submit Answer</Button>
+          <Button variant="outline-primary" onClick={handlePreviousQuestion} disabled={currentSkippedIndex === 0}>Previous</Button>
+          <Button variant="outline-primary" onClick={handleNextQuestion} disabled={currentSkippedIndex === skippedQuestions.length - 1}>Next</Button>
+    </div>
+    );
   }
 
   //Rendering questions/answers

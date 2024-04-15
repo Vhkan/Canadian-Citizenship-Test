@@ -78,7 +78,7 @@ const Test = () => {
         // const questionId = skippedQuestions[i];
         const response = await axios.post("http://localhost:9000/test", { questionIds: [skippedQuestions[currentSkippedIndex]]  });
         if (!response.data) {
-          throw new Error(`Fetching skipped QA with ID ${skippedQuestions[i]} from DB failed.`);
+          throw new Error(`Fetching skipped QA with ID ${skippedQuestions[currentSkippedIndex]} from DB failed.`);
         }
         // Update skippedQuestions state with the fetched question
         setSkippedQuestions(prev => {
@@ -93,6 +93,7 @@ const Test = () => {
       console.log("Error fetching skipped QA from DB:", error);
     }
   };
+
   //Next question
   const handleNextQuestion = () => {
     if (currentSkippedIndex < skippedQuestions.length - 1) {
@@ -100,6 +101,7 @@ const Test = () => {
       fetchSkippedQA();
     }
   };
+  
   //Prev question
   const handlePreviousQuestion = () => {
     if (currentSkippedIndex > 0) {

@@ -1,11 +1,12 @@
 /* Global App Styles go here */
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: light dark;
+  /* color-scheme: light dark; */
 /* font color */
-  color: #31363F;
+  color:#707c92;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -20,13 +21,16 @@ body {
   padding: 0;
   display: flex;
   max-width: 1280px;
+  color:#454646;
 }
 
-a {
-  color:rgb(240, 215, 52);
+/* a {
+  color:#1c5b93;
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #fe4e19;
-}
+  color:#0a7bdd;
+} */
+
+

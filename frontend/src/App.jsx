@@ -19,7 +19,7 @@ function App() {
         <TopNavBar />
         <div>
           <Routes>
-            <Route path="/" element={<MainPage />} />
+            <Route path="/" element={<MainPage/>} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register/>}/>
             <Route path="/test" element={<Test/>}/>

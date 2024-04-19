@@ -1,0 +1,22 @@
+/* Main Page Style */
+.main-page-block {
+  display: flex;
+  flex-direction: column;
+  /* background: linear-gradient(to bottom,#f9f9f9, rgb(241, 241, 241) 55%, #c7c6c3); */
+  background: #f9f9f9;
+  height: 35em;
+}
+
+.main-page-about-section {
+  display: flex;
+  flex-direction: column;
+  padding-left: 18em;
+  padding-right: 18em;
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
+
+/* .info-title{} */
+
+/* main-page-info */
+

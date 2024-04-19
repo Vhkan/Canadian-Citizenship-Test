@@ -53,7 +53,8 @@ const getSkippedQuestionAnswer = async (questionIds) => {
   WHERE
    Questions.question_id = ANY($1)
    ORDER BY
-   Questions.question_id, Answers.answer_id;`;
+   Questions.question_id, Answers.answer_id
+   LIMIT 1;`;
 
    //Questions.question_id = ANY(ARRAY[${questionIds.join(',')}])
 

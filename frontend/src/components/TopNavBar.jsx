@@ -35,20 +35,22 @@ export default function TopNavBar() {
 
   return (
     <div className='top-nav-bar'>
-      <a href="/">🍁Canadian Citizenship Test</a>
+      <div>
+        <a href="/" className='top_nav_logo-link'>🍁Canadian Citizenship Test</a>
+      </div>      
       <div className='top-nav-links'>
         <a href="/" className='nav-link'>Home</a>
         <a href="/prepare" className='nav-link'>Prepare</a>
         <a href="/about"className='nav-link'>About</a>
         <a href="/test"className='nav-link'>Test</a>
-        </div>
+      </div>
       {isLoggedIn ? (
         <div>
           <span className='loggedIn'>Logged in as {username}</span>
           <Button onClick={handleLogout} className="logout-btn">Logout</Button>
         </div>
       ) : (
-        <Button onClick={() => navigate("/login")} className="login-btn">Login</Button>
+        <Button variant="outline-secondary" onClick={() => navigate("/login")} className="login-btn">Login</Button>
       )}
     </div>
   )

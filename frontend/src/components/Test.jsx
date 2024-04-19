@@ -15,7 +15,7 @@ const Test = () => {
   //Keep track of incorrect questions id's to pull out later from a db on a score/result component
   const [incorrectAnswers, setIncorrectAnswers] = useState([]);
   const [answeredQuestions, setAnsweredQuestions] = useState(0); //Total # of questions answered corr + incorr
-  const [skippedQuestions, setSkippedQuestions] = useState([]);
+  const [skippedQuestions, setSkippedQuestions] = useState([]);//Skipped question + answer storage
   const [skipsCount, setSkipsCount] = useState(3);
   const [showSkippedQuestions, setShowSkippedQuestions] = useState(false);
   const [useSkipped, setUseSkipped] = useState(false);// controlling the q/a regular/skipped
@@ -28,7 +28,7 @@ const Test = () => {
   //Moved the "test finished" condition from handleSkippedQuestions to a useEffect 
   //and fetch the skipped questions once the test is over
   useEffect(() => {
-    if (totalQuestionsAnswered === 17 && skippedQuestions.length === 3 && skipsCount === 0) {
+    if (totalQuestionsAnswered >= 17 && skippedQuestions.length <= 3 && skipsCount < 3) {
       setShowSkippedQuestions(true);
       fetchSkippedQA();  
       setUseSkipped(true);     
@@ -41,12 +41,10 @@ const Test = () => {
   //Fetching questions from the server
   useEffect(() => {
     const totalQuestionsToAnswer = 20;
-    const questionsAnsweredOrSkipped = answeredQuestions + skippedQuestions.length;
-    if (questionsAnsweredOrSkipped < totalQuestionsToAnswer) {
+    const currentQuestionsAnswered = totalQuestionsAnswered - skippedQuestions.length;
+    if (currentQuestionsAnswered < totalQuestionsToAnswer) {
       fetchQuestions();
-    } else if (skippedQuestions.length > 0 && questionsAnsweredOrSkipped < totalQuestionsToAnswer + skippedQuestions.length) {
-      // fetchSkippedQA(); //Server error happens here when called
-      //Load skipped questions from local storage
+    } else if (skippedQuestions.length > 0 && currentQuestionsAnswered < totalQuestionsToAnswer + skippedQuestions.length) {
       setQuestionAnswer(null);
       setAnsweredQuestions(0);
       setLoading(false);
@@ -63,7 +61,6 @@ const Test = () => {
           console.log('Data received:', response.data); //Loggin the received data
           setQuestionAnswer(response.data); //Setting the randomly selected question
           setLoading(false); //Setting loading to false when data is received
-          //setShowSkippedQuestions(false); // Resetting showSkippedQuestions state
         })
         .catch(error => {
           console.error('Error fetching question:', error);
@@ -73,17 +70,19 @@ const Test = () => {
 
   //Fetching the skipped questions from a DB
   const fetchSkippedQA = () => {
-    //logi how to regulate the total number of test questions inclding skipped to have 20
-
     axios.post("http://localhost:9000/test", { questionIds: skippedQuestions })
     .then(response => {
       if(!response.data) {
         throw new Error('Fetching skipped QA from DB failed.');
       } 
-      // Handling fetched skipped questions by setting to skippedQuestions
+      //Handling fetched skipped questions by setting to skippedQuestions
       setSkippedQuestions(response.data);
       console.log("skippedQA data from fetchSkippedQA is (response.data):", response.data);
       setShowSkippedQuestions(true);
+      //After fetching skipped questions, set useSkipped to true
+      setTimeout(() => {
+        setUseSkipped(true);
+      }, 0);
     })
     .catch(error => {
       console.log("Error fetching skipped QA from DB is:", error);
@@ -136,19 +135,18 @@ const Test = () => {
     setSelectedAnswer(null); //Reset selection for the next question
     setTimeout(() => {
       setResult(null);
-      fetchQuestions();
+      //fetchQuestions();
     }, 0);
   };
 
     //Handling skip question clicks
     const handleSkippedQuestion = () => {
      if (skipsCount <= 0 || !questionAnswer) return; //disable the button clicks
-   
       setSkipsCount(prev => prev - 1);  //Decrement skips count
       //saves the id's of scipped questions to pull them out at the end of the test
       if(questionAnswer && questionAnswer.answers) {
       setSkippedQuestions(prev => [...prev, questionAnswer]);
-      console.log('Skipped Questions ids from handleSkippedQuestions func are:', [...skippedQuestions, questionAnswer.question_id]);
+      console.log('Skipped Questions Objects + AnswerIds from handleSkippedQuestions func are:', [...skippedQuestions, questionAnswer.question_id]);
       console.log("Answered question + skipsCount + questionAnswer", answeredQuestions, skipsCount, questionAnswer); 
       }   
     }; 
@@ -171,40 +169,45 @@ const Test = () => {
   if (correctAnswers + incorrectAnswers.length === 20) {
     const testResult = determineTestResult();
   
-      return (
-        <div>
-          <h1>Test Completed!</h1>
-          <p> <b>Number of Correct Answers:</b> {correctAnswers} </p>
-
-          {/* pass/no pass */}
-          {/* IF NO PASS => SHOW LINK TO STUDY GUIDE || PASS => CONGRATULATIONS + TEST SCORE */}
-          <p><b>Test Result:</b> {testResult}</p>
-
-          {/* skipped questions id are shown */}
-          <p><b>Skipped Questions:</b> {skippedQuestions.map(q => `${q.question_id}: ${q.question_text}`).join(', ')}</p>
-
-     {/* Display incorrectly answered questions */}
-     <p><b>Questions answered incorrectly👇</b></p>
-      {incorrectAnswers.map((incorrect, index) => (
-        <div key={index} style={{ marginBottom: '50px' }}>
-          <p><b>Question ID:</b> {incorrect.question_id}</p>
-          <p><b>Question:</b> {incorrect.question_text}</p>
-          <p><b>Your Answer:</b>{incorrect.user_answer}</p>
-          <p><b>Correct Answer:</b> {incorrect.correct_answer}</p>
-        </div>
-      ))}
-
-      {/* Display total number of incorrect answers */}
-      <p><b>Number of Incorrect Answers:</b> {incorrectAnswers.length}</p>
-
-          {/* A link to Learning Material will be here */}
-          <h4>Review the Discover Canada Study Guide</h4>
-          <p>Discover Canada: Read online: <a href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/publications-manuals/discover-canada/read-online.html" target="_blank">Study Guide – Discover Canada</a></p>
-          
-          {/* <Button onClick={() => navigate("/test")}>Start Over</Button> */}
-          <a href="/test"><b>Start The Test Over</b></a>
-        </div>
-      )
+    return (
+      <div>
+        <h1>Test Completed!</h1>
+        <p><b>Number of Correct Answers:</b> {correctAnswers} </p>
+        <p><b>Number of Incorrect Answers:</b> {incorrectAnswers.length}</p>
+    
+        {/* Determine the test result message */}
+        {testResult === 'Passed!' ? (
+          <div>
+            <h2>🎆Congratulations!🎆</h2>
+            <p><b>Test Result:</b> {testResult}</p>
+          </div>
+        ) : (
+          <div>
+            <h2>Try better next time!</h2>
+            <p><b>Test Result:</b> {testResult}</p>
+            <h4>Review the Discover Canada Study Guide</h4>
+            <p>Find the Discover Canada Study Guide here: <a href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/publications-manuals/discover-canada/read-online.html" target="_blank">Study Guide – Discover Canada</a></p>
+          </div>
+        )}
+    
+        {/* Skipped questions */}
+        {/* <p><b>Skipped Questions:</b> {skippedQuestions.map(q => `${q.question_id}: ${q.question_text}`).join(', ')}</p> */}
+    
+        {/* Display incorrectly answered questions */}
+        <h3>Questions answered incorrectly👇</h3>
+        {incorrectAnswers.map((incorrect, index) => (
+          <div key={index} style={{ marginBottom: '50px' }}>
+            <p><b>Question ID:</b> {incorrect.question_id}</p>
+            <p><b>Question:</b> {incorrect.question_text}</p>
+            <p><b>Your Answer:</b> {incorrect.user_answer}</p>
+            <p><b>Correct Answer:</b> {incorrect.correct_answer}</p>
+          </div>
+        ))}
+    
+        {/* Start the test over link */}
+        <a href="/test"><b>Start The Test Over</b></a>
+      </div>
+    );
   }
 
   //Rendering skipped questions if any
@@ -213,13 +216,14 @@ const Test = () => {
   
   const currentSkippedQuestion = skippedQuestions[0];
   console.log("Current skipped question:", currentSkippedQuestion);
-  if(showSkippedQuestions && skippedQuestions.length === 3) {
+  
+  if(showSkippedQuestions && totalQuestionsAnswered >= 17 && skippedQuestions.length <= 3 && skipsCount < 3) {
     return (
       <div>
         <h3>Skipped Questions:</h3>
         {skippedQuestions.map((question, index) => (
           <div key={index}>
-          <h3> Skipped Question {index + 1}</h3>
+          <h5> Skipped Question {index + 1}</h5>
           <p>{question.question_text}</p>
           <Form>
            {question.answers && question.answers.map(answer => (

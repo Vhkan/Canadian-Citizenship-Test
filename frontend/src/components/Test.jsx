@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Timer from './Timer'
 // import { useNavigate } from "react-router-dom";
 
 
@@ -22,6 +23,25 @@ const Test = () => {
 
 
   const [currentSkippedIndex, setCurrentSkippedIndex] = useState(0);
+
+  // Timer code/////// ///////////// ///////////// /////////////
+    const [timerStarted, setTimerStarted] = useState(false); // Track if the timer has started
+    const [timeElapsed, setTimeElapsed] = useState(0); // Track time elapsed for summary page
+
+    // Start the timer automatically when the test starts
+    useEffect(() => {
+      setTimerStarted(true);
+    }, []);
+
+    // Update time elapsed every second
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setTimeElapsed(prevTime);
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }, []);
+  ///////////// ///////////// ///////////// /////////////
  
   //Total questions answered (correct + icorrect)
   const totalQuestionsAnswered = correctAnswers + incorrectAnswers.length;
@@ -265,6 +285,8 @@ const Test = () => {
   return (
     <div>
         <div>
+          {/* Timer */}
+          <div><Timer timeInSeconds={30 * 60 - timeElapsed} /></div>
            <h3>Question {answeredQuestions + 1} of 20</h3>
            <p>{questionAnswer.question_text}</p>
            <h3>Answers:</h3>

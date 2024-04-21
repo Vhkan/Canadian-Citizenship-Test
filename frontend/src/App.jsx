@@ -7,8 +7,8 @@ import Test from './components/Test';
 import Prepare from './components/Prepare';
 import About from './components/About';
 import MainPage from './components/MainPage';
+import Footer from './components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import Results from './components/Results';
 
 
 function App() {
@@ -25,9 +25,9 @@ function App() {
             <Route path="/test" element={<Test/>}/>
             <Route path="/prepare" element={<Prepare/>}/>
             <Route path="/about" element={<About/>}/>
-            {/* <Route path="/results" element={<Results/>}/> */}
           </Routes>
         </div>
+        <Footer/>
       </div>
     </Router>
   );

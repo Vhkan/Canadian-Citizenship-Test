@@ -2,6 +2,8 @@ import '../styles/TopNavBar.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCanadianMapleLeaf } from '@fortawesome/free-brands-svg-icons';
 
 
 export default function TopNavBar() {
@@ -36,7 +38,10 @@ export default function TopNavBar() {
   return (
     <div className='top-nav-bar'>
       <div>
-        <a href="/" className='top_nav_logo-link'>🍁Canadian Citizenship Test</a>
+      <a href="/" className='top_nav_logo-link'>
+            <FontAwesomeIcon icon={faCanadianMapleLeaf} color="#c22020" size="lg" /> 
+            Canadian Citizenship Test
+        </a>
       </div>      
       <div className='top-nav-links'>
         <a href="/" className='nav-link'>Home</a>

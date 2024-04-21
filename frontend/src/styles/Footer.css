@@ -1,0 +1,12 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 33em;
+  width: 100%;
+  background-image: url("../public/ottawa3.png");
+  background-size: 90% auto;
+  background-position: calc(50% - 27px) 50%;
+  background-repeat: no-repeat;
+}
+

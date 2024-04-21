@@ -63,7 +63,8 @@
 button.btn.btn-test-link {
   color: rgb(194, 32, 32);
   padding: 0.8rem 4rem;
-  font-size: 1.2rem; 
+  font-size: 1.4rem; 
+  background-color: #c7c6c3;
 }
 
 .pass-test-navigate {
@@ -91,6 +92,7 @@ button.btn.btn-test-link {
 .main-page-block, .secondary-page-block {
   overflow: hidden;
 }
+
 .secondary-page-block {
   display: flex;
   justify-content: space-between;

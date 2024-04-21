@@ -16,6 +16,8 @@
 - fontawesome-svg-core
 - free-brands-svg-icons
 - react-fontawesome
+- react-countdown": "^2.3.5"
+- react-countdown-circle-timer": "^3.2.1"
 
 
 

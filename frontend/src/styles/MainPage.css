@@ -65,6 +65,11 @@ button.btn.btn-test-link {
   padding: 0.8rem 4rem;
   font-size: 1.4rem; 
   background-color: #d4d4d4;
+  transition: transform 0.3s ease;
+}
+
+button.btn.btn-test-link:hover {
+  transform: scale(1.07); /* Increase the button size by 7% on hover */
 }
 
 .pass-test-navigate {

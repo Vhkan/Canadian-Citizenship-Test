@@ -31,8 +31,8 @@ function MainPage() {
           <h1 className="secondary-info-title"> Official Study Guide🍁</h1>
           <div className="secondary-page-info">
             <h5> ✓ Based on Discover Canada: The Rights and Responsibilities of Citizenship</h5>
-            <h5> ✓ Based on Discover Canada: The Rights and Responsibilities of Citizenship</h5>
-            <h5> ✓ Based on Discover Canada: The Rights and Responsibilities of Citizenship</h5>
+            <h5> ✓ Access to the official study guide material while preparing for your Citizenship test</h5>
+            <h5> ✓ Unlimitead and the most accurate simulation of the official Canadian Citizenship test</h5>
           </div>
           <div className="study-guide">
             <StudyGuide/>

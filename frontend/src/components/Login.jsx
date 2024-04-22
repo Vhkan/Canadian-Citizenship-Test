@@ -69,7 +69,7 @@ const Login = () => {
           <input className="password-input" id="password" type="password" name="password" value={userLogin.password} onChange={loginHandler} />
         </div>
         <div>{errorMessage}</div>
-        <Button type="submit" className="login-btn" variant="outline-secondary">Login</Button>
+        <Button type="submit" className="login-input-btn" variant="outline-secondary">Login</Button>
         <h5 className="register-here"> Don't have an account? Register here.</h5>
         <Button onClick={() => navigate("/register")} className="register-btn" variant="outline-secondary">Register</Button>
       </form>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
+import '../styles/Register.css';
 //Toast package for user notifications
 // import { toast } from 'react-toastify';
 
@@ -80,7 +81,7 @@ const Register = () => {
   return (
     <div className="registration-block">
       <h5 className="fill-in-form">Please fill in the registration form below📝</h5>
-      <h5>Register</h5>
+        {/* <h6 className="register-title">Register</h6> */}
 
       <form onSubmit={handleRegisterSubmit}>
         <div className="username-section">
@@ -111,7 +112,7 @@ const Register = () => {
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         {successMessage && <p style={{color: 'green'}}>{successMessage}</p>}
 
-        <Button className="register-btn" variant="outline-secondary">Register</Button>
+        <Button className="register-input-btn" variant="outline-secondary">Register</Button>
       </form>
     </div>
   );

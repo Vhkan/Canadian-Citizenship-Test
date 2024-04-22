@@ -46,12 +46,11 @@
   box-sizing: border-box;
 }
 
-.login-btn {
-  margin-left: 5.5em;
+.login-input-btn {
   margin-top: 1em;
-  padding-right: 20px;
+  width: 40%;
 } 
-.login-btn:hover {
+.login-input-btn:hover {
   transform: scale(1.05);
 }
 
@@ -59,8 +58,12 @@
   transform: scale(1.05);
 }
 
+.register-btn {
+  width: 40%;
+}
+
 .register-here {
   font-size: 15px;
-  padding-top: 1em;
+  padding-top: 1.5em;
   padding-bottom: 1em;
 }

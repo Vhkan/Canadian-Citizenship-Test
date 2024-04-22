@@ -259,15 +259,20 @@ const Test = () => {
   }
 
   //Rendering skipped questions if any
-  console.log("Rendering skipped questions, showSkippedQuestions:", showSkippedQuestions);
-  console.log(" Rendering skipped questions, skippedQuestions.length:", skippedQuestions.length);
+  // console.log("Rendering skipped questions, showSkippedQuestions:", showSkippedQuestions);
+  // console.log(" Rendering skipped questions, skippedQuestions.length:", skippedQuestions.length);
+
    {/* skipped questions form below */}
   if (showSkippedQuestions && totalQuestionsAnswered >= 17 && skippedQuestions.length > 0 && skipsCount < 3) {
     return (
-    <div>
-      <h3>Skipped Question {currentSkippedIndex + 1}</h3>
-      <p>{skippedQuestions[currentSkippedIndex]?.question_text}</p>
-      <Form>
+    <div className='skips-container'>
+      {/* Progress Bar */}
+      <div className='test-progress'><TestProgressBar currentQuestion={answeredQuestions + 1} totalQuestions={20} /></div>
+      <div className='scips-content-container'>
+        <h3 className='questions-count'>Skipped Question {currentSkippedIndex + 1}</h3>
+        <h4 className='skips-question-text'>{skippedQuestions[currentSkippedIndex]?.question_text}</h4>
+        <h4 className='answers'>Answers:</h4>
+        <Form className='skips-answers-text'>
         {skippedQuestions[currentSkippedIndex]?.answers.map(answer => (
           <Form.Check 
             key={answer.answer_id}
@@ -280,9 +285,13 @@ const Test = () => {
           />
         ))}
         </Form>
-          <Button variant="outline-success" onClick={handleSubmit}>Submit Answer</Button>
-          <Button variant="outline-primary" className='prev-skip-btn' onClick={handlePreviousQuestion} disabled={currentSkippedIndex === 0}>Previous</Button>
-          <Button variant="outline-primary" className='next-skip-btn' onClick={handleNextQuestion} disabled={currentSkippedIndex === skippedQuestions.length - 1}>Next</Button>
+          <Button variant="outline-primary" className='skips-submit-answer-btn' onClick={handleSubmit}>Submit Answer</Button>
+          <Button variant="outline-warning" className='prev-skip-btn' onClick={handlePreviousQuestion} disabled={currentSkippedIndex === 0}>Previous</Button>
+          <Button variant="outline-warning" className='next-skip-btn' onClick={handleNextQuestion} disabled={currentSkippedIndex === skippedQuestions.length - 1}>Next</Button>
+          <p className='skips-explain'>⁎ Click «Submit Answer» followed by «Next»</p>
+          {/* Timer */}
+          <div className='test-timer'><Timer timeInSeconds={30 * 60 - timeElapsed} /></div>
+    </div>
     </div>
     );
   }
@@ -297,9 +306,9 @@ const Test = () => {
            <h3 className='questions-count'>Question {answeredQuestions + 1} of 20</h3>
            <h4 className='question-text'>{questionAnswer.question_text}</h4>
            <h4 className='answers'>Answers:</h4>
-          <Form className='answers-text'>
-           {questionAnswer.answers.map(answer => (
-            <Form.Check 
+            <Form className='answers-text'>
+             {questionAnswer.answers.map(answer => (
+              <Form.Check
               key={answer.answer_id}
               type='radio'
               label={answer.answer_text}

@@ -21,7 +21,7 @@
 .questions-count {
   padding: 1em 1.5em;
   height: 3em;
-  width: 13em;
+  width: 12.5em;
   color: #595f6b;
   background-color: #f1f1f1b7;
   border: 1px solid #b1b1b1;
@@ -91,3 +91,39 @@
   }
 }
 
+/* Skipped Questions Page Style */
+.skips-container {
+  width: 100%;  
+  max-width: 100%;  
+  margin: 0 auto;  
+  padding-right: 0;  
+  box-sizing: border-box;
+}
+
+.scips-content-container {
+  padding-top: 3em;
+  padding-left: 4em;
+  padding-bottom: 5em;
+}
+
+.skips-question-text {
+  margin-bottom: 1em;
+  margin-top: 1.5em;
+}
+
+.skips-answers-text {
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 20px;
+  padding-bottom: 0.5em;
+}
+
+.skips-submit-answer-btn {
+  margin-right: 10px;
+}
+
+.prev-skip-btn {
+  margin-right: 10px;
+}
+
+.skips-explain {padding-top: 1em;}

@@ -140,6 +140,25 @@ button.btn.btn-test-link:hover {
   background-color: white;
 }
 
+.prepare-link {
+  padding-top: 2em;
+}
+
+button.btn.prepare-page-btn-link {
+  color: rgb(194, 32, 32);
+  padding: 0.9rem 3.1rem;
+  font-size: 1.4rem; 
+  font-weight: 500;
+  background-color: #d4d4d4;
+  transition: transform 0.3s ease;
+  margin-top: 1em;  
+}
+
+button.btn.prepare-page-btn-link:hover {
+  transform: scale(1.05);
+}
+
+
 @media (max-width: 800px) {
   .secondary-page-about-section{
     flex-direction: column;
@@ -152,4 +171,3 @@ button.btn.btn-test-link:hover {
     margin-top: 0;
   }
 }
-

@@ -1,9 +1,14 @@
 import "../styles/MainPage.css";
 import NavigateTest from "./NavigateTest";
 import StudyGuide from "./StudyGuide";
+import Button from "react-bootstrap/esm/Button";
+import { useNavigate } from "react-router";
 
 
 function MainPage() {
+
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className="main-page-block">
@@ -36,6 +41,10 @@ function MainPage() {
           </div>
           <div className="study-guide">
             <StudyGuide/>
+          </div>
+          <div>
+            <h4 className="prepare-link">Prepare for the Test Today with the Official Study Guide</h4>
+            <Button className="prepare-page-btn-link" variant="light" onClick={() => navigate('/prepare')}>Prepare</Button>
           </div>
         </div>
           <div className="secondary-page-picture">

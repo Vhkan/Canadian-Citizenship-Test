@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Timer from './Timer'
 import TestProgressBar from './ProgressBar';
+import '../styles/Test.css';
 
 
 const Test = () => {
@@ -260,7 +261,7 @@ const Test = () => {
   //Rendering skipped questions if any
   console.log("Rendering skipped questions, showSkippedQuestions:", showSkippedQuestions);
   console.log(" Rendering skipped questions, skippedQuestions.length:", skippedQuestions.length);
-  
+   {/* skipped questions form below */}
   if (showSkippedQuestions && totalQuestionsAnswered >= 17 && skippedQuestions.length > 0 && skipsCount < 3) {
     return (
     <div>
@@ -280,26 +281,23 @@ const Test = () => {
         ))}
         </Form>
           <Button variant="outline-success" onClick={handleSubmit}>Submit Answer</Button>
-          <Button variant="outline-primary" onClick={handlePreviousQuestion} disabled={currentSkippedIndex === 0}>Previous</Button>
-          <Button variant="outline-primary" onClick={handleNextQuestion} disabled={currentSkippedIndex === skippedQuestions.length - 1}>Next</Button>
+          <Button variant="outline-primary" className='prev-skip-btn' onClick={handlePreviousQuestion} disabled={currentSkippedIndex === 0}>Previous</Button>
+          <Button variant="outline-primary" className='next-skip-btn' onClick={handleNextQuestion} disabled={currentSkippedIndex === skippedQuestions.length - 1}>Next</Button>
     </div>
     );
   }
 
   //Rendering questions/answers
   return (
-    <div>
-        <div className='test-container'>
-            {/* Progress Bar */}
-            <div className='test-progress'><TestProgressBar currentQuestion={answeredQuestions + 1} totalQuestions={20} /></div>
-          <div className='test-timer-progress'>
-    
-          </div>
-           <h3>Question {answeredQuestions + 1} of 20</h3>
-           <p>{questionAnswer.question_text}</p>
-           <h3>Answers:</h3>
+    <div className='test-container'>
+          {/* Progress Bar */}
+          <div className='test-progress'><TestProgressBar currentQuestion={answeredQuestions + 1} totalQuestions={20} /></div>
 
-          <Form>
+        <div className='content-container'>
+           <h3 className='questions-count'>Question {answeredQuestions + 1} of 20</h3>
+           <h4 className='question-text'>{questionAnswer.question_text}</h4>
+           <h4 className='answers'>Answers:</h4>
+          <Form className='answers-text'>
            {questionAnswer.answers.map(answer => (
             <Form.Check 
               key={answer.answer_id}
@@ -309,21 +307,19 @@ const Test = () => {
               id={`answer-${answer.answer_id}`}
               value={answer.answer_id}
               onChange={handleAnswerChange}
+              className="custom-radio-button"
             />
            ))}
           </Form>
           <div>
-          <Button variant="outline-success" onClick={handleSubmit}>Submit Answer</Button> 
-          <Button variant="outline-warning" onClick={handleSkippedQuestion} disabled={skipsCount === 0}>Skip Question</Button>
+          <Button variant="outline-success" className='answer-submit-btn' onClick={handleSubmit}>Submit Answer</Button> 
+          <Button variant="outline-warning" className='skip-question-btn' onClick={handleSkippedQuestion} disabled={skipsCount === 0}>Skip Question</Button>
           {result && <p>{result}</p>}
           </div>
-
           {/* Start test btn */}
-          <Button variant='outline-success' onClick={startTest} disabled={buttonDisabled}>Start Test</Button>
-
+          <Button variant='outline-success' className='start-test-btn' onClick={startTest} disabled={buttonDisabled}>Start Test</Button>
           {/* Timer */}
           <div className='test-timer'><Timer timeInSeconds={30 * 60 - timeElapsed} /></div>
-
         </div>  
     </div>
   );

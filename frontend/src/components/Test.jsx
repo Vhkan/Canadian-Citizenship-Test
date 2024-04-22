@@ -246,7 +246,7 @@ const Test = () => {
             </div>
           ))}
           {/* Start the test over link */}
-          <h5>Review the Discover Canada Study Guide: <a className="discovery-guide-link" href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/publications-manuals/discover-canada/read-online.html" target="_blank">  «Discover Canada Study Guide»</a></h5>
+          <h5>Review: <a className="discovery-guide-link" href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/publications-manuals/discover-canada/read-online.html" target="_blank">  «Discover Canada Study Guide»</a></h5>
           <h5>Ready for another try? <a href="/test">«Start The Test Over»</a> </h5>
           </div>
       </div>

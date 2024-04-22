@@ -165,7 +165,7 @@ const Test = () => {
       //Set incorrectly answered question by user: 
       //icorrQuestion + incorrAnswer + corrAnswer for test result: 
       setIncorrectAnswers(prev => [
-        ...prev,
+        ...prev,  
         {
           question_id: questionAnswer.question_id,
           question_text: questionAnswer.question_text,
@@ -178,9 +178,7 @@ const Test = () => {
     }
     setAnsweredQuestions(prev => prev + 1);
     setSelectedAnswer(null); //Reset selection for the next question
-    setTimeout(() => {
       setResult(null);
-    }, 0);
   };
 
   //Handling skip question clicks

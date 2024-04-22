@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/esm/Button";
+import '../styles/Register.css';
 //Toast package for user notifications
 // import { toast } from 'react-toastify';
 
@@ -77,39 +79,40 @@ const Register = () => {
 
   
   return (
-    <div>
-      <h5>Please fill in the registration form📝 below👇</h5>
-      <h2>Register</h2>
+    <div className="registration-block">
+      <h5 className="fill-in-form">Please fill in the registration form below📝</h5>
+        {/* <h6 className="register-title">Register</h6> */}
+
       <form onSubmit={handleRegisterSubmit}>
-        <div>
-          <label htmlFor="username">Username</label>
+        <div className="username-section">
+          <label className="-register-username" htmlFor="username">Username</label>
           <input id="username" type="text" name="username" value={username} onChange={handleUsername} />
         </div>
 
-        <div>
-          <label htmlFor="first_name">First name</label>
+        <div className="fn-section">
+          <label className="register-fn" htmlFor="first_name">First name</label>
           <input id="first_name" type="text" name="first_name" value={firstName} onChange={handleFirstName}/>
         </div>
 
-        <div>
-          <label htmlFor="last_name">Last name</label>
+        <div className="ln-section">
+          <label className="register-ln" htmlFor="last_name">Last name</label>
           <input id="last_name" type="text" name="last_name" value={lastName} onChange={handleLastName}/>
         </div>
 
-        <div>
-          <label htmlFor="email">Email</label>
+        <div className="email-section">
+          <label className="register-email" htmlFor="email">Email</label>
           <input id="email" type="email" name="email" value={email} onChange={handleEmail}/>
         </div>
 
-        <div>
-          <label htmlFor="password">Password</label>
+        <div className="password-section">
+          <label className="register-password" htmlFor="password">Password</label>
           <input id="password" type="password" name="password" value={password} onChange={handlePassword}/>
         </div>
 
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         {successMessage && <p style={{color: 'green'}}>{successMessage}</p>}
 
-        <button>Register</button>
+        <Button className="register-input-btn" variant="outline-secondary">Register</Button>
       </form>
     </div>
   );

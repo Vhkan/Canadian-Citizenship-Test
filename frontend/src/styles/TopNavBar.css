@@ -35,14 +35,22 @@
   margin-right: 5.7em; 
 }
 
+.login-btn:hover {
+  transform: scale(1.05);
+}
+
 .loggedIn {
   font-size: 0.7em;
-  color: white;
+  color: #174975;
   padding-right: 1em;
 }
 
 .logout-btn {
-  margin-right: 1em;
+  margin-right: 2.5em;
+}
+
+.logout-btn:hover {
+  transform: scale(1.05);
 }
 
 .top_nav_logo-link{

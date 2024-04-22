@@ -52,7 +52,7 @@ export default function TopNavBar() {
       {isLoggedIn ? (
         <div>
           <span className='loggedIn'>Logged in as {username}</span>
-          <Button onClick={handleLogout} className="logout-btn">Logout</Button>
+          <Button onClick={handleLogout} className="logout-btn" variant='secondary'>Logout</Button>
         </div>
       ) : (
         <Button variant="outline-secondary" onClick={() => navigate("/login")} className="login-btn">Login</Button>

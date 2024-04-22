@@ -183,7 +183,7 @@ const Test = () => {
 
   //Handling skip question clicks
   const handleSkippedQuestion = () => {
-    if (skipsCount <= 0 || !questionAnswer) return; //disable the button clicks
+    if (!timerStarted|| skipsCount <= 0 || !questionAnswer) return; //disable the button clicks
     setSkipsCount(prev => prev - 1);  //Decrement skips count
     //saves the id's of scipped questions to pull them out at the end of the test
     if(questionAnswer && questionAnswer.answers) {
@@ -195,7 +195,7 @@ const Test = () => {
 
   //Determining test result
   const determineTestResult = () => {
-  //const totalQuestionsAnswered = correctAnswers + incorrectAnswers.length;
+  const totalQuestionsAnswered = correctAnswers + incorrectAnswers.length;
   const incorrectAnswersCount = incorrectAnswers.filter(answer => answer.user_answer !== answer.correct_answer).length;
   const passed = correctAnswers >= 16 && totalQuestionsAnswered === 20 && incorrectAnswersCount <= 4;
   return passed ? "Passed!" : "Failed!";
@@ -227,7 +227,6 @@ const Test = () => {
           </div>
         ) : (
           <div>
-            {/* <h4>Try better next time!</h4> */}
             <h4 className='test-result-display' style={{ color: 'red' }} >Test Result: {testResult}</h4>
           </div>
         )}
@@ -263,7 +262,7 @@ const Test = () => {
       <div className='scips-content-container'>
         <h3 className='questions-count'>Skipped Question {currentSkippedIndex + 1}</h3>
         <h4 className='skips-question-text'>{skippedQuestions[currentSkippedIndex]?.question_text}</h4>
-        <h4 className='answers'>Answers:</h4>
+        {/* <h4 className='answers'>Answers:</h4> */}
         <Form className='skips-answers-text'>
         {skippedQuestions[currentSkippedIndex]?.answers.map(answer => (
           <Form.Check 
@@ -297,7 +296,7 @@ const Test = () => {
         <div className='content-container'>
            <h3 className='questions-count'>Question {answeredQuestions + 1} of 20</h3>
            <h4 className='question-text'>{questionAnswer.question_text}</h4>
-           <h4 className='answers'>Answers:</h4>
+           {/* <h4 className='answers'>Answers:</h4> */}
             <Form className='answers-text'>
              {questionAnswer.answers.map(answer => (
               <Form.Check

@@ -43,13 +43,15 @@
 
 .question-text {
   margin-bottom: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 }
 
 .answers-text {
-  margin-bottom: 20px;
   font-weight: 600;
-  font-size: 20px;
-  padding-bottom: 0.5em;
+  font-size: 21px;
+  padding-bottom: 2em;
+  color: #535454;
 }
 
 .test-timer {
@@ -114,8 +116,9 @@
 .skips-answers-text {
   margin-bottom: 20px;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 21px;
   padding-bottom: 0.5em;
+  color: #535454;
 }
 
 .skips-submit-answer-btn {

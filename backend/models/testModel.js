@@ -13,7 +13,8 @@ const getRandomQuestionAnswer = async () => {
       SELECT question_id FROM Answers WHERE is_correct = true ORDER BY RANDOM() LIMIT 1
     )
   ORDER BY
-    Questions.question_id, Answers.is_correct DESC, RANDOM();`;
+    RANDOM();`;
+    //  Questions.question_id, Answers.is_correct DESC, RANDOM();`; //prev implementation to have 1st answer always correct 
 
     //Sending all 4 questions + related answers
     const response = await pool.query(nativeQuery);

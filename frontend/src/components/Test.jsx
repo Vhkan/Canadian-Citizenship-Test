@@ -144,7 +144,7 @@ const Test = () => {
 
   //Handling user's answer submit
   const handleSubmit = () => {
-    if (!selectedAnswer || !questionAnswer || !questionAnswer.answers) return; //Prevent submitting without a selected answer
+    if (!timerStarted|| !selectedAnswer || !questionAnswer || !questionAnswer.answers) return; //Prevent submitting without a selected answer
 
     //Checking if the answer was chosen is correct
     const correctAnswer = questionAnswer.answers.find(answer => answer.is_correct)?.answer_id.toString();
@@ -290,16 +290,11 @@ const Test = () => {
   return (
     <div>
         <div className='test-container'>
-          <div className='test-timer-progress'>
-            {/* Timer */}
-            <div className='test-timer'><Timer timeInSeconds={30 * 60 - timeElapsed} /></div>
             {/* Progress Bar */}
             <div className='test-progress'><TestProgressBar currentQuestion={answeredQuestions + 1} totalQuestions={20} /></div>
+          <div className='test-timer-progress'>
+    
           </div>
-
-          {/* Start test btn */}
-            <Button variant='outline-success' onClick={startTest} disabled={buttonDisabled}>Start Test</Button>
-
            <h3>Question {answeredQuestions + 1} of 20</h3>
            <p>{questionAnswer.question_text}</p>
            <h3>Answers:</h3>
@@ -322,6 +317,13 @@ const Test = () => {
           <Button variant="outline-warning" onClick={handleSkippedQuestion} disabled={skipsCount === 0}>Skip Question</Button>
           {result && <p>{result}</p>}
           </div>
+
+          {/* Start test btn */}
+          <Button variant='outline-success' onClick={startTest} disabled={buttonDisabled}>Start Test</Button>
+
+          {/* Timer */}
+          <div className='test-timer'><Timer timeInSeconds={30 * 60 - timeElapsed} /></div>
+
         </div>  
     </div>
   );

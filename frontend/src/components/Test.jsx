@@ -4,7 +4,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Timer from './Timer'
 import TestProgressBar from './ProgressBar';
-// import { useNavigate } from "react-router-dom";
 
 
 const Test = () => {
@@ -25,24 +24,29 @@ const Test = () => {
 
   const [currentSkippedIndex, setCurrentSkippedIndex] = useState(0);
 
-  // Timer code/////// ///////////// ///////////// /////////////
-    const [timerStarted, setTimerStarted] = useState(false); // Track if the timer has started
-    const [timeElapsed, setTimeElapsed] = useState(0); // Track time elapsed for summary page
+  // Timer code
+  const [timerStarted, setTimerStarted] = useState(false); // Track if the timer has started
+  const [timeElapsed, setTimeElapsed] = useState(0); // Track time elapsed for summary page
+  const [buttonDisabled, setButtonDisabled] = useState(false); //Disable the btn when the test is started
+  
+  // Start test and reset timer
+  const startTest = () => {
+    setTimerStarted(true); // Start the timer
+    setTimeElapsed(0);     // Reset the timer
+    setButtonDisabled(true);
+  };
 
-    // Start the timer automatically when the test starts
+    //Update time elapsed every second
     useEffect(() => {
-      setTimerStarted(true);
-    }, []);
+      if (timerStarted) {
+        const interval = setInterval(() => {
+          setTimeElapsed(prevTime => prevTime + 1);
+        }, 1000);
+    
+        return () => clearInterval(interval);
+      }
+    }, [timerStarted]);
 
-    // Update time elapsed every second
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setTimeElapsed(prevTime);
-      }, 1000);
-
-      return () => clearInterval(interval);
-    }, []);
-  ///////////// ///////////// ///////////// /////////////
  
   //Total questions answered (correct + icorrect)
   const totalQuestionsAnswered = correctAnswers + incorrectAnswers.length;
@@ -285,13 +289,17 @@ const Test = () => {
   //Rendering questions/answers
   return (
     <div>
-        <div>
-          {/* Timer */}
-          <div><Timer timeInSeconds={30 * 60 - timeElapsed} /></div>
-          <br />
-          {/* Progress Bar */}
-          <div><TestProgressBar currentQuestion={answeredQuestions + 1} totalQuestions={20} /></div>
-          <br />
+        <div className='test-container'>
+          <div className='test-timer-progress'>
+            {/* Timer */}
+            <div className='test-timer'><Timer timeInSeconds={30 * 60 - timeElapsed} /></div>
+            {/* Progress Bar */}
+            <div className='test-progress'><TestProgressBar currentQuestion={answeredQuestions + 1} totalQuestions={20} /></div>
+          </div>
+
+          {/* Start test btn */}
+            <Button variant='outline-success' onClick={startTest} disabled={buttonDisabled}>Start Test</Button>
+
            <h3>Question {answeredQuestions + 1} of 20</h3>
            <p>{questionAnswer.question_text}</p>
            <h3>Answers:</h3>

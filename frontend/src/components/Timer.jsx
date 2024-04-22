@@ -1,7 +1,7 @@
-import React from 'react';
+  import React from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 
-const Timer = ({ timeInSeconds }) => {
+const Timer = ({ timeInSeconds, isPlaying }) => {
   // Function to convert seconds to minutes and seconds
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
@@ -12,7 +12,7 @@ const Timer = ({ timeInSeconds }) => {
   return (
     <div className="timer-wrapper">
       <CountdownCircleTimer
-        isPlaying
+        isPlaying={isPlaying}
         duration={timeInSeconds}
         colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
         onComplete={() => {

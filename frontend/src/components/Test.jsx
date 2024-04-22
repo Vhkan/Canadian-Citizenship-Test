@@ -312,12 +312,12 @@ const Test = () => {
            ))}
           </Form>
           <div>
-          <Button variant="outline-success" className='answer-submit-btn' onClick={handleSubmit}>Submit Answer</Button> 
+          <Button variant="outline-primary" className='answer-submit-btn' onClick={handleSubmit}>Submit Answer</Button> 
           <Button variant="outline-warning" className='skip-question-btn' onClick={handleSkippedQuestion} disabled={skipsCount === 0}>Skip Question</Button>
           {result && <p>{result}</p>}
           </div>
           {/* Start test btn */}
-          <Button variant='outline-success' className='start-test-btn' onClick={startTest} disabled={buttonDisabled}>Start Test</Button>
+          <Button variant='outline-primary' className='start-test-btn' onClick={startTest} disabled={buttonDisabled}>Start Test</Button>
           {/* Timer */}
           <div className='test-timer'><Timer timeInSeconds={30 * 60 - timeElapsed} /></div>
         </div>  

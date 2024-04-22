@@ -1,0 +1,66 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 3em;
+  margin: 100px auto; 
+  max-width: 450px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 15px;
+  background: #ffffff;
+}
+
+.login-your-account {
+  margin-bottom: 1em;
+}
+
+.email-label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
+.login-input {
+  width: 100%;
+  height: 2.5em;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.password-label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
+.password-input {
+  width: 100%;
+  height: 2.5em;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.login-btn {
+  margin-left: 5.5em;
+  margin-top: 1em;
+  padding-right: 20px;
+} 
+.login-btn:hover {
+  transform: scale(1.05);
+}
+
+.register-btn:hover {
+  transform: scale(1.05);
+}
+
+.register-here {
+  font-size: 15px;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}

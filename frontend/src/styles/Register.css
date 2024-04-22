@@ -1,0 +1,16 @@
+.registration-block {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 3em;
+  margin: 100px auto; 
+  max-width: 450px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 15px;
+  background: #ffffff;
+}
+
+.fill-in-form {
+ margin-bottom: 5px;
+}
+ 

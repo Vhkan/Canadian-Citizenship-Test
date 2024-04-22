@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
+import '../styles/Login.css'
 
 const Login = () => {
 
@@ -39,7 +40,7 @@ const Login = () => {
     console.log("Data object (token info):", data);
 
     if(!response.ok) {
-      throw new Error(data.message || "An error occurred during login.");
+      throw new Error(data.message || "An error occurred during login."); //invalid user credentials
     } 
     //savin token and username to local storage
        localStorage.setItem("token", data.token);
@@ -55,22 +56,22 @@ const Login = () => {
 
   
   return (
-    <div>
-      <h3>Login if you are a registered user👇</h3>
+    <div className="login-form">
+      <h5 className="login-your-account">Login in to your account</h5>
       <form onSubmit={handleLogin}>
         <div>
-          <label htmlFor="email">Email⚡</label>
-          <input id="email" type="email" name="email" value={userLogin.email} onChange={loginHandler} />
+          <label className="email-label" htmlFor="email">Email</label>
+          <input className="login-input" id="email" type="email" name="email" value={userLogin.email} onChange={loginHandler} />
         </div>
 
         <div>
-          <label htmlFor="email">Password⚡</label>
-          <input id="password" type="password" name="password" value={userLogin.password} onChange={loginHandler} />
+          <label className="password-label" htmlFor="email">Password</label>
+          <input className="password-input" id="password" type="password" name="password" value={userLogin.password} onChange={loginHandler} />
         </div>
         <div>{errorMessage}</div>
-        <Button type="submit" className="login-btn">Login</Button>
-        <h3>Register here 👇</h3>
-        <Button onClick={() => navigate("/register")} className="register-btn">Register</Button>
+        <Button type="submit" className="login-btn" variant="outline-secondary">Login</Button>
+        <h5 className="register-here"> Don't have an account? Register here.</h5>
+        <Button onClick={() => navigate("/register")} className="register-btn" variant="outline-secondary">Register</Button>
       </form>
     </div>
   );

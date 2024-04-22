@@ -3,6 +3,7 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Timer from './Timer'
+import TestProgressBar from './ProgressBar';
 // import { useNavigate } from "react-router-dom";
 
 
@@ -287,6 +288,10 @@ const Test = () => {
         <div>
           {/* Timer */}
           <div><Timer timeInSeconds={30 * 60 - timeElapsed} /></div>
+          <br />
+          {/* Progress Bar */}
+          <div><TestProgressBar currentQuestion={answeredQuestions + 1} totalQuestions={20} /></div>
+          <br />
            <h3>Question {answeredQuestions + 1} of 20</h3>
            <p>{questionAnswer.question_text}</p>
            <h3>Answers:</h3>

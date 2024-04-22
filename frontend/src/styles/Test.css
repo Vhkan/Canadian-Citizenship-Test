@@ -127,3 +127,48 @@
 }
 
 .skips-explain {padding-top: 1em;}
+
+
+
+/* Test result/score */
+
+.test-result {
+  background-color: white;
+  border-radius: 8px;
+  padding: 3.5em;
+  margin: 20px auto;
+  max-width: 600px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  max-width: 100%;
+}
+
+.test-score h5 {
+  margin: 10px 0;
+  color: #333;
+}
+
+.incorrect-qa {
+  margin-top: 2em;
+  padding-top: 1em;
+  border-top: 2px dashed #f5f6f8; /* separation */
+}
+
+.incorrect-qa h4 {
+  color: #dc3545;
+  margin-bottom: 15px;
+}
+
+.incorrect-qa h5, .incorrect-qa h6 {
+  margin: 5px 0;
+  color: #495057;
+}
+
+.discovery-guide-link, .test-result a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.discovery-guide-link:hover, .test-result a:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}

@@ -26,7 +26,7 @@ const Timer = ({ timeInSeconds, isPlaying }) => {
       >
         {({ remainingTime }) => (
           <div className="timer">
-            <div className="text">Time Remaining:</div>
+            <div className="timer-text">Time Remaining:</div>
             <div className="timer-value">{formatTime(remainingTime)}</div> {/* Convert remaining time */}
           </div>
         )}

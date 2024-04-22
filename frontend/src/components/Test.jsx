@@ -8,7 +8,7 @@ import '../styles/Test.css';
 
 
 const Test = () => {
-  //Setttign q/a to [] to keep track of the q/a progress
+ 
   const [questionAnswer, setQuestionAnswer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -22,7 +22,6 @@ const Test = () => {
   const [showSkippedQuestions, setShowSkippedQuestions] = useState(false);
   const [useSkipped, setUseSkipped] = useState(false);// controlling the q/a regular/skipped
 
-
   const [currentSkippedIndex, setCurrentSkippedIndex] = useState(0);
 
   // Timer code
@@ -34,7 +33,7 @@ const Test = () => {
   const startTest = () => {
     setTimerStarted(true); // Start the timer
     setTimeElapsed(0);     // Reset the timer
-    setButtonDisabled(true);
+    setButtonDisabled(true);//Disable "start test" button once clicked to prevent timer restart
   };
 
     //Update time elapsed every second
@@ -120,7 +119,7 @@ const Test = () => {
     }
   };
 
-  //Next question
+  //Next question for skips
   const handleNextQuestion = () => {
     if (currentSkippedIndex < skippedQuestions.length - 1) {
       setCurrentSkippedIndex(prevIndex => prevIndex + 1);
@@ -128,7 +127,7 @@ const Test = () => {
     }
   };
   
-  //Prev question
+  //Prev question for skips
   const handlePreviousQuestion = () => {
     if (currentSkippedIndex > 0) {
       setCurrentSkippedIndex(prevIndex => prevIndex - 1);
@@ -181,7 +180,6 @@ const Test = () => {
     setSelectedAnswer(null); //Reset selection for the next question
     setTimeout(() => {
       setResult(null);
-      //fetchQuestions();
     }, 0);
   };
 
@@ -197,7 +195,6 @@ const Test = () => {
     }   
   }; 
 
-  
   //Determining test result
   const determineTestResult = () => {
   //const totalQuestionsAnswered = correctAnswers + incorrectAnswers.length;
@@ -206,62 +203,59 @@ const Test = () => {
   return passed ? "Passed!" : "Failed!";
 };
   
-  
-  //In case the no data is fetched from the DB
+  //In case no data is fetched from the DB
   if (loading) return <p>Loading...</p>;
 
-  //For testing purposes: show the test score. Later will be resirect to a new (score/results) page
+  //test result
   if (correctAnswers + incorrectAnswers.length === 20) {
     const testResult = determineTestResult();
 
-  // Check if there are skipped questions
-    // const hasSkippedQuestions = skippedQuestions.length > 0 && skipsCount < 3;
-  
+
+  //Test results section
     return (
-      <div>
-        <h1>Test Completed!</h1>
-        <p><b>Number of Correct Answers:</b> {correctAnswers} </p>
-        <p><b>Number of Incorrect Answers:</b> {incorrectAnswers.length}</p>
+      <div className='test-result'>
+        
+        <h3>Test Completed!</h3>
+
+        <div className='test-score'>
+          <h5>Number of Correct Answers: {correctAnswers} </h5>
+          <h5>Number of Incorrect Answers: {incorrectAnswers.length}</h5>
+        </div>
     
         {/* Determine the test result message */}
         {testResult === 'Passed!' ? (
           <div>
-            <h2>🎆Congratulations!🎆</h2>
-            <p><b>Test Result:</b> {testResult}</p>
+            <h4 className='test-result-display' style={{ color: 'green' }}>Test Result: {testResult}</h4>
           </div>
         ) : (
           <div>
-            <h2>Try better next time!</h2>
-            <p><b>Test Result:</b> {testResult}</p>
-            <h4>Review the Discover Canada Study Guide</h4>
-            <p>Find the Discover Canada Study Guide here: <a href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/publications-manuals/discover-canada/read-online.html" target="_blank">Study Guide – Discover Canada</a></p>
+            {/* <h4>Try better next time!</h4> */}
+            <h4 className='test-result-display' style={{ color: 'red' }} >Test Result: {testResult}</h4>
           </div>
         )}
     
-        {/* Skipped questions */}
-        {/* <p><b>Skipped Questions:</b> {skippedQuestions.map(q => `${q.question_id}: ${q.question_text}`).join(', ')}</p> */}
-    
         {/* Display incorrectly answered questions */}
-        <h3>Questions answered incorrectly👇</h3>
-        {incorrectAnswers.map((incorrect, index) => (
-          <div key={index} style={{ marginBottom: '50px' }}>
-            {/* <p><b>Question ID:</b> {incorrect.question_id}</p> */}
-            <p><b>Question:</b> {incorrect.question_text}</p>
-            <p><b>Your Answer:</b> {incorrect.user_answer}</p>
-            <p><b>Correct Answer:</b> {incorrect.correct_answer}</p>
+        <div className='incorrect-qa'>
+          <h4>Questions answered incorrectly:</h4>
+          {incorrectAnswers.map((incorrect, index) => (
+            <div key={index} style={{ marginBottom: '50px' }}>
+              {/* <p>Question ID: {incorrect.question_id}</p> */}
+              <h5>Question: {incorrect.question_text}</h5>
+              <h6>Your Answer: {incorrect.user_answer}</h6>
+              <h6>Correct Answer: {incorrect.correct_answer}</h6>
+            </div>
+          ))}
+          {/* Start the test over link */}
+          <h5>Review the Discover Canada Study Guide: <a className="discovery-guide-link" href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/publications-manuals/discover-canada/read-online.html" target="_blank">  «Discover Canada Study Guide»</a></h5>
+          <h5>Ready for another try? <a href="/test">«Start The Test Over»</a> </h5>
           </div>
-        ))}
-    
-        {/* Start the test over link */}
-        <a href="/test"><b>Start The Test Over</b></a>
       </div>
     );
   }
 
-  //Rendering skipped questions if any
-  // console.log("Rendering skipped questions, showSkippedQuestions:", showSkippedQuestions);
-  // console.log(" Rendering skipped questions, skippedQuestions.length:", skippedQuestions.length);
 
+
+  //Rendering skipped questions section
    {/* skipped questions form below */}
   if (showSkippedQuestions && totalQuestionsAnswered >= 17 && skippedQuestions.length > 0 && skipsCount < 3) {
     return (
@@ -296,7 +290,7 @@ const Test = () => {
     );
   }
 
-  //Rendering questions/answers
+  //Rendering main page questions/answers section
   return (
     <div className='test-container'>
           {/* Progress Bar */}

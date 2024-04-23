@@ -1,7 +1,8 @@
 import React from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+import '../styles/Timer.css';
 
-const Timer = ({ timeInSeconds }) => {
+const Timer = ({ timeInSeconds, isPlaying }) => {
   // Function to convert seconds to minutes and seconds
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
@@ -12,9 +13,11 @@ const Timer = ({ timeInSeconds }) => {
   return (
     <div className="timer-wrapper">
       <CountdownCircleTimer
-        isPlaying
+        isPlaying={isPlaying}
         duration={timeInSeconds}
         colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+        size={300}
+        strokeWidth={12}
         onComplete={() => {
           // Handle completion
           console.log("Timer completed");
@@ -24,7 +27,7 @@ const Timer = ({ timeInSeconds }) => {
         {({ remainingTime }) => (
           <div className="timer">
             <div className="text">Time Remaining:</div>
-            <div className="value">{formatTime(remainingTime)}</div> {/* Convert remaining time */}
+            <div className="timer-value">{formatTime(remainingTime)}</div> {/* Convert remaining time */}
           </div>
         )}
       </CountdownCircleTimer>

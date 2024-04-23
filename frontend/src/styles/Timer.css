@@ -1,0 +1,18 @@
+.timer-wrapper {
+  padding: 2.8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.timer-value {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  font-weight: 700;
+  color:  rgb(122, 177, 236);
+}

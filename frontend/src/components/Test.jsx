@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Timer from './Timer'
 import TestProgressBar from './ProgressBar';
-// import { useNavigate } from "react-router-dom";
+import '../styles/Test.css';
 
 
 const Test = () => {
@@ -25,24 +25,29 @@ const Test = () => {
 
   const [currentSkippedIndex, setCurrentSkippedIndex] = useState(0);
 
-  // Timer code/////// ///////////// ///////////// /////////////
-    const [timerStarted, setTimerStarted] = useState(false); // Track if the timer has started
-    const [timeElapsed, setTimeElapsed] = useState(0); // Track time elapsed for summary page
+  // Timer code
+  const [timerStarted, setTimerStarted] = useState(false); // Track if the timer has started
+  const [timeElapsed, setTimeElapsed] = useState(0); // Track time elapsed for summary page
+  const [buttonDisabled, setButtonDisabled] = useState(false); //Disable the btn when the test is started
+  
+  // Start test and reset timer
+  const startTest = () => {
+    setTimerStarted(true); // Start the timer
+    setTimeElapsed(0);     // Reset the timer
+    setButtonDisabled(true);
+  };
 
-    // Start the timer automatically when the test starts
+    //Update time elapsed every second
     useEffect(() => {
-      setTimerStarted(true);
-    }, []);
+      if (timerStarted) {
+        const interval = setInterval(() => {
+          setTimeElapsed(prevTime => prevTime + 1);
+        }, 1000);
+    
+        return () => clearInterval(interval);
+      }
+    }, [timerStarted]);
 
-    // Update time elapsed every second
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setTimeElapsed(prevTime);
-      }, 1000);
-
-      return () => clearInterval(interval);
-    }, []);
-  ///////////// ///////////// ///////////// /////////////
  
   //Total questions answered (correct + icorrect)
   const totalQuestionsAnswered = correctAnswers + incorrectAnswers.length;
@@ -140,7 +145,7 @@ const Test = () => {
 
   //Handling user's answer submit
   const handleSubmit = () => {
-    if (!selectedAnswer || !questionAnswer || !questionAnswer.answers) return; //Prevent submitting without a selected answer
+    if (!timerStarted|| !selectedAnswer || !questionAnswer || !questionAnswer.answers) return; //Prevent submitting without a selected answer
 
     //Checking if the answer was chosen is correct
     const correctAnswer = questionAnswer.answers.find(answer => answer.is_correct)?.answer_id.toString();
@@ -256,7 +261,7 @@ const Test = () => {
   //Rendering skipped questions if any
   console.log("Rendering skipped questions, showSkippedQuestions:", showSkippedQuestions);
   console.log(" Rendering skipped questions, skippedQuestions.length:", skippedQuestions.length);
-  
+   {/* skipped questions form below */}
   if (showSkippedQuestions && totalQuestionsAnswered >= 17 && skippedQuestions.length > 0 && skipsCount < 3) {
     return (
     <div>
@@ -276,27 +281,23 @@ const Test = () => {
         ))}
         </Form>
           <Button variant="outline-success" onClick={handleSubmit}>Submit Answer</Button>
-          <Button variant="outline-primary" onClick={handlePreviousQuestion} disabled={currentSkippedIndex === 0}>Previous</Button>
-          <Button variant="outline-primary" onClick={handleNextQuestion} disabled={currentSkippedIndex === skippedQuestions.length - 1}>Next</Button>
+          <Button variant="outline-primary" className='prev-skip-btn' onClick={handlePreviousQuestion} disabled={currentSkippedIndex === 0}>Previous</Button>
+          <Button variant="outline-primary" className='next-skip-btn' onClick={handleNextQuestion} disabled={currentSkippedIndex === skippedQuestions.length - 1}>Next</Button>
     </div>
     );
   }
 
   //Rendering questions/answers
   return (
-    <div>
-        <div>
-          {/* Timer */}
-          <div><Timer timeInSeconds={30 * 60 - timeElapsed} /></div>
-          <br />
+    <div className='test-container'>
           {/* Progress Bar */}
-          <div><TestProgressBar currentQuestion={answeredQuestions + 1} totalQuestions={20} /></div>
-          <br />
-           <h3>Question {answeredQuestions + 1} of 20</h3>
-           <p>{questionAnswer.question_text}</p>
-           <h3>Answers:</h3>
+          <div className='test-progress'><TestProgressBar currentQuestion={answeredQuestions + 1} totalQuestions={20} /></div>
 
-          <Form>
+        <div className='content-container'>
+           <h3 className='questions-count'>Question {answeredQuestions + 1} of 20</h3>
+           <h4 className='question-text'>{questionAnswer.question_text}</h4>
+           <h4 className='answers'>Answers:</h4>
+          <Form className='answers-text'>
            {questionAnswer.answers.map(answer => (
             <Form.Check 
               key={answer.answer_id}
@@ -306,14 +307,19 @@ const Test = () => {
               id={`answer-${answer.answer_id}`}
               value={answer.answer_id}
               onChange={handleAnswerChange}
+              className="custom-radio-button"
             />
            ))}
           </Form>
           <div>
-          <Button variant="outline-success" onClick={handleSubmit}>Submit Answer</Button> 
-          <Button variant="outline-warning" onClick={handleSkippedQuestion} disabled={skipsCount === 0}>Skip Question</Button>
+          <Button variant="outline-primary" className='answer-submit-btn' onClick={handleSubmit}>Submit Answer</Button> 
+          <Button variant="outline-warning" className='skip-question-btn' onClick={handleSkippedQuestion} disabled={skipsCount === 0}>Skip Question</Button>
           {result && <p>{result}</p>}
           </div>
+          {/* Start test btn */}
+          <Button variant='outline-primary' className='start-test-btn' onClick={startTest} disabled={buttonDisabled}>Start Test</Button>
+          {/* Timer */}
+          <div className='test-timer'><Timer timeInSeconds={30 * 60 - timeElapsed} /></div>
         </div>  
     </div>
   );

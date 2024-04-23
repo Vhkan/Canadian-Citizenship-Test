@@ -243,8 +243,10 @@ const Test = () => {
             </div>
           ))}
           {/* Start the test over link */}
-          <h5>Review: <a className="discovery-guide-link" href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/publications-manuals/discover-canada/read-online.html" target="_blank">  «Discover Canada Study Guide»</a></h5>
-          <h5>Ready for another try? <a href="/test">«Start The Test Over»</a> </h5>
+          <div className='result-page-links'>
+            <h5 className='result-page-links'>Review: <a className="discovery-guide-link" href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/publications-manuals/discover-canada/read-online.html" target="_blank">  «Discover Canada Study Guide»</a></h5>
+            <h5 className='result-page-links'>Ready for another try? <a href="/test">«Start The Test Over»</a> </h5>
+          </div>
           </div>
       </div>
     );

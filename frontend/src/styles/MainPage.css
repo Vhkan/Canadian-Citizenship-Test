@@ -78,14 +78,14 @@ button.btn.btn-test-link:hover {
 }
 
 .discovery-guide-link {
-  color: #0044cc; 
+  color: #007bff;
   text-decoration: none;
   padding-left: 0.5em;
 }
 
 .discovery-guide-link:hover {
-  color: #ff5500; 
   text-decoration: underline;
+  color: #0056b3;
 }
 
 

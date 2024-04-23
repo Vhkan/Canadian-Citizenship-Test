@@ -47,7 +47,7 @@ const Login = () => {
        localStorage.setItem("user", JSON.stringify({ username: data.username }));
        setErrorMessage("");
       //  navigate("/test");
-      navigate("/test", { replace: true, state: { loggedIn: true } });
+      navigate("/", { replace: true, state: { loggedIn: true } });
 
     } catch(error) {
       setErrorMessage(error.message);

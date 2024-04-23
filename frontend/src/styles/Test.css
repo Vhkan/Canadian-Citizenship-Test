@@ -65,6 +65,10 @@
   padding-bottom: 2em;
   color: #535454;
   max-width: 800px;
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 

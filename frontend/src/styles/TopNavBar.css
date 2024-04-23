@@ -67,3 +67,53 @@
   color: #174975;
   font-weight: bold;
 }
+
+
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .top-nav-bar {
+    flex-direction: column;
+    height: auto;
+    padding-top: 0.5em;
+    align-items: flex-start; /* Aligns items to the left on smaller screens */
+  }
+
+  .top-nav-links {
+    width: 100%; /* Takes full width to line up properly */
+    justify-content: center;
+    order: 1; /* Ensures that links come before buttons */
+  }
+
+  .login-btn, .logout-btn .loggedIn {
+    order: 2; /* Makes buttons come after the links */
+    margin-right: 2em; /* Adjusts margin for mobile */
+    margin-bottom: 1em;/* Gives some space between nav links and buttons */
+    align-self: flex-end; 
+  }
+
+  .loggedIn {
+    justify-content: flex-end; /* This should push the buttons to the right */
+    padding-left: 30em; /* Add some padding for spacing */
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-nav-bar {
+    font-size: 0.8em;
+  }
+
+  .nav-link {
+    margin-right: 0.5rem;
+  }
+
+  .top_nav_logo-link {
+    padding-left: 0.5em;
+  }
+  .loggedIn {
+    justify-content: flex-end; /* This should push the buttons to the right */
+    padding-left: 30em;
+    margin-right: 0;
+  }
+}

@@ -159,7 +159,7 @@ button.btn.prepare-page-btn-link:hover {
 }
 
 
-@media (max-width: 800px) {
+@media (max-width: 600px) {
   .secondary-page-about-section{
     flex-direction: column;
   }

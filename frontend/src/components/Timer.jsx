@@ -17,7 +17,7 @@ const Timer = ({ timeInSeconds, isPlaying }) => {
         duration={timeInSeconds}
         colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
         size={300}
-        strokeWidth={12}
+        strokeWidth={15}
         onComplete={() => {
           // Handle completion
           console.log("Timer completed");

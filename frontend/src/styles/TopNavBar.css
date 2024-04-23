@@ -61,3 +61,9 @@
   text-decoration: none;
   padding-left: 3em;
   }
+
+
+.nav-link.active {
+  color: #174975;
+  font-weight: bold;
+}

@@ -46,7 +46,13 @@
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   max-width: 800px;
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }
+
+
 @media (max-width: 700px) {
   .question-text {
     padding-top: 2em;

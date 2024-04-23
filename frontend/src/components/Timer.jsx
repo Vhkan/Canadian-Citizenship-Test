@@ -16,8 +16,8 @@ const Timer = ({ timeInSeconds, isPlaying }) => {
         isPlaying={isPlaying}
         duration={timeInSeconds}
         colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
-        size={300}
-        strokeWidth={15}
+        size={100}
+        strokeWidth={5}
         onComplete={() => {
           // Handle completion
           console.log("Timer completed");
@@ -26,7 +26,7 @@ const Timer = ({ timeInSeconds, isPlaying }) => {
       >
         {({ remainingTime }) => (
           <div className="timer">
-            <div className="timer-text">Time Remaining:</div>
+            <div className="timer-text">Time Left:</div>
             <div className="timer-value">{formatTime(remainingTime)}</div> {/* Convert remaining time */}
           </div>
         )}

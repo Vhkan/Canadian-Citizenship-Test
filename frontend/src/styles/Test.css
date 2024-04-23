@@ -43,13 +43,15 @@
 
 .question-text {
   margin-bottom: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 }
 
 .answers-text {
-  margin-bottom: 20px;
   font-weight: 600;
-  font-size: 20px;
-  padding-bottom: 0.5em;
+  font-size: 21px;
+  padding-bottom: 2em;
+  color: #535454;
 }
 
 .test-timer {
@@ -114,8 +116,9 @@
 .skips-answers-text {
   margin-bottom: 20px;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 21px;
   padding-bottom: 0.5em;
+  color: #535454;
 }
 
 .skips-submit-answer-btn {
@@ -138,8 +141,9 @@
   padding: 3.5em;
   margin: 20px auto;
   max-width: 600px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
   max-width: 100%;
+  border-top: 1.5px solid #f5f6f8; 
+  border-bottom: 1.5px solid #f5f6f8;
 }
 
 .test-score h5 {
@@ -150,7 +154,7 @@
 .incorrect-qa {
   margin-top: 2em;
   padding-top: 1em;
-  border-top: 2px dashed #f5f6f8; /* separation */
+  border-top: 1.5px solid #f5f6f8; /* separation */
 }
 
 .incorrect-qa h4 {

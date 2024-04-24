@@ -112,7 +112,7 @@ const Register = () => {
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         {successMessage && <p style={{color: 'green'}}>{successMessage}</p>}
 
-        <Button className="register-input-btn" variant="outline-secondary">Register</Button>
+        <Button className="register-input-btn" variant="outline-secondary" onClick={handleRegisterSubmit}>Register</Button>
       </form>
     </div>
   );

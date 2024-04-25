@@ -147,7 +147,7 @@ VALUES
 (37, 'A Bill.', true),
 (37, 'A New law.', false),
 (37, 'A Proposed law.', false),
-(37, 'A New proposal.', false36),
+(37, 'A New proposal.', false),
 (38, 'St. Lawrence River.', true),
 (38, 'Fraser River.', false),
 (38, 'Niagara.', false),

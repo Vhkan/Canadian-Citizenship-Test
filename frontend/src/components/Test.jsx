@@ -36,7 +36,7 @@ const Test = () => {
     setButtonDisabled(true);//Disable "start test" button once clicked to prevent timer restart
   };
 
-    //Update time elapsed every second
+    //TIMER Update time elapsed every second
     useEffect(() => {
       if (timerStarted) {
         const interval = setInterval(() => {
@@ -262,7 +262,11 @@ const Test = () => {
       {/* Progress Bar */}
       <div className='test-progress'><TestProgressBar currentQuestion={answeredQuestions + 1} totalQuestions={20} /></div>
       <div className='scips-content-container'>
+        <div className='timer-questioncount'>
         <h3 className='questions-count'>Skipped Question {currentSkippedIndex + 1}</h3>
+          {/* Timer */}
+          <div className='test-timer'><Timer timeInSeconds={30 * 60 - timeElapsed} /></div>
+          </div>
         <h4 className='skips-question-text'>{skippedQuestions[currentSkippedIndex]?.question_text}</h4>
         {/* <h4 className='answers'>Answers:</h4> */}
         <Form className='skips-answers-text'>
@@ -282,21 +286,24 @@ const Test = () => {
           <Button variant="outline-warning" className='prev-skip-btn' onClick={handlePreviousQuestion} disabled={currentSkippedIndex === 0}>Previous</Button>
           <Button variant="outline-warning" className='next-skip-btn' onClick={handleNextQuestion} disabled={currentSkippedIndex === skippedQuestions.length - 1}>Next</Button>
           <p className='skips-explain'>⁎ Click «Submit Answer» followed by «Next»</p>
-          {/* Timer */}
-          <div className='test-timer'><Timer timeInSeconds={30 * 60 - timeElapsed} /></div>
+
     </div>
     </div>
     );
   }
 
-  //Rendering main page questions/answers section
+  //Rendering MAIN page questions/answers section
   return (
     <div className='test-container'>
           {/* Progress Bar */}
           <div className='test-progress'><TestProgressBar currentQuestion={answeredQuestions + 1} totalQuestions={20} /></div>
-
         <div className='content-container'>
-           <h3 className='questions-count'>Question {answeredQuestions + 1} of 20</h3>
+           <div className='timer-questioncount'>
+            <div className='test-timer'><Timer timeInSeconds={30 * 60 - timeElapsed} /></div>  {/* Timer */}
+            <h3 className='questions-count'>Question {answeredQuestions + 1} of 20</h3>
+          </div>  
+
+          <div className={timerStarted ? 'content-container unblurred' : 'content-container blurred-content'}>
            <h4 className='question-text'>{questionAnswer.question_text}</h4>
            {/* <h4 className='answers'>Answers:</h4> */}
             <Form className='answers-text'>
@@ -313,6 +320,8 @@ const Test = () => {
             />
            ))}
           </Form>
+          </div>
+          
           <div>
           <Button variant="outline-primary" className='answer-submit-btn' onClick={handleSubmit}>Submit Answer</Button> 
           <Button variant="outline-warning" className='skip-question-btn' onClick={handleSkippedQuestion} disabled={skipsCount === 0}>Skip Question</Button>
@@ -320,8 +329,7 @@ const Test = () => {
           </div>
           {/* Start test btn */}
           <Button variant='outline-primary' className='start-test-btn' onClick={startTest} disabled={buttonDisabled}>Start Test</Button>
-          {/* Timer */}
-          <div className='test-timer'><Timer timeInSeconds={30 * 60 - timeElapsed} /></div>
+
         </div>  
     </div>
   );

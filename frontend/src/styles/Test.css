@@ -13,9 +13,9 @@
 }
 
 .content-container {
-  padding-top: 3em;
-  padding-left: 4em;
-  padding-bottom: 3em;
+  padding-top: 4em;
+  padding-left: 8em;
+  padding-bottom: 4em;
 }
 
 .questions-count {
@@ -42,22 +42,33 @@
 }
 
 .question-text {
-  margin-bottom: 1em;
-  padding-top: 0.5em;
+  margin-bottom: 1.5em;
+  padding-top: 1.5em;
   padding-bottom: 0.5em;
+  max-width: 800px;
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+
+@media (max-width: 700px) {
+  .question-text {
+    padding-top: 2em;
+  }
 }
 
 .answers-text {
   font-weight: 600;
   font-size: 21px;
-  padding-bottom: 2em;
+  padding-bottom: 2.5em;
   color: #535454;
-}
-
-.test-timer {
-  position: absolute;
-  top: 180px;
-  right: 80px;
+  max-width: 800px;
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 .answer-submit-btn, .skip-question-btn {
@@ -76,22 +87,20 @@
   margin-bottom: 3em;
 }
 
-@media (max-width: 700px) {
-  .content-container {
-    padding: 1em;
-  }
 
-  .test-timer {
-    top: 20px;
-    right: 10px;
-    width: 80px;
-    height: 80px;
-  }
-
-  .answer-submit-btn, .skip-question-btn, .start-test-btn {
-    margin-bottom: 10px;
-  }
+/* Test Timer Position */
+.timer-questioncount {
+  display: flex;
+  align-items: center; 
+  width: 100%; 
 }
+
+.test-timer {
+  position: absolute;
+  top: 200px;
+  right: 130px;
+}
+
 
 /* Skipped Questions Page Style */
 .skips-container {
@@ -105,7 +114,7 @@
 .scips-content-container {
   padding-top: 3em;
   padding-left: 4em;
-  padding-bottom: 5em;
+  padding-bottom: 3em;
 }
 
 .skips-question-text {
@@ -181,4 +190,81 @@
   color: black;
   font-size: 22px;
   padding-top: 0.5em;
+}
+
+/* Blur the test content before the test started */
+.blurred-content {
+  filter: blur(5px);
+  pointer-events: none;
+  user-select: none;
+  padding-left: 0;
+}
+
+/* When the test starts, remove blur */
+.unblurred {
+  filter: none;
+  pointer-events: auto;
+  user-select: auto;
+  padding: 0;
+}
+
+
+
+
+/* Q/A content container responsiveness */
+
+/* For mobile devices and smaller tablets */
+@media (max-width: 480px) {
+  .content-container {
+    padding: 0.8em;
+  }
+
+  .test-timer {
+    position: absolute;
+    top: 90px;
+    right: 10px;
+  }
+
+  .answer-submit-btn, .skip-question-btn, .start-test-btn {
+    margin-bottom: 8px;
+  }
+}
+
+/* For tablets */
+@media (min-width: 481px) and (max-width: 1200px) {
+  .content-container {
+    padding: 1em;
+  }
+
+  .test-timer {
+    top: 100px;
+    right: 10px;
+  }
+
+  .answer-submit-btn, .skip-question-btn, .start-test-btn {
+    margin-bottom: 10px;
+  }
+}
+
+/* Specific adjustment for screens between 770px to 1002px */
+@media (min-width: 770px) and (max-width: 1002px) {
+  .test-timer {
+    top: 120px; /* Slightly lower than the default for other sizes */
+  }
+}
+
+/* For small desktops and larger tablets */
+@media (min-width: 1203px) {
+  .content-container {
+    padding: 2.5em;
+  }
+
+  .test-timer {
+    top: 220px;
+    right: 130px;
+  }
+
+  .answer-submit-btn, .skip-question-btn, .start-test-btn {
+    margin-bottom: 12px;
+  }
 }

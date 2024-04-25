@@ -13,4 +13,3 @@
 - As a user, I should be able to see the test score and result after answering all 20 test questions.
 - As a user, I should be able to click the "book link" and be redirected to the test prep material if I failed the test.
 - As a user, I can click "Contact Us" and see the contact information.
-- As a user, I can click on the "Facebook", "Instagram", "YouTube" icons and be redirected to the mentioned pages.

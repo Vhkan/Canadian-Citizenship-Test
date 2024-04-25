@@ -1,13 +1,36 @@
 .footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   height: 33em;
   width: 100%;
   background-image: url("../public/ottawa3.png");
-  background-size: 90% auto;
+  background-size: 93% auto;
   background-position: calc(50% - 27px) 50%;
   background-repeat: no-repeat;
+  background-position: bottom center; /* Align the image at the bottom center */
+  position: relative;
 }
 
-/* come back here: footer is not staying fixed */
+
+/* For tablets and small desktops */
+@media (max-width: 1024px) {
+  .footer {
+    height: 25em; /* Adjust the height for smaller screens */
+  }
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+  .footer {
+    height: 20em; /* Adjust the height for mobile devices */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center; /* Center the content vertically */
+  }
+}
+
+/* For smaller mobile devices */
+@media (max-width: 480px) {
+  .footer {
+    height: 15em; /* Adjust height for very small devices */
+  }
+}

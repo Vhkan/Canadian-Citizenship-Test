@@ -3,12 +3,12 @@ The Canadian Citizenship Test application serves as an invaluable preparation to
 
 ### Application Features
 - The application's Home page contains the introductory information about the application.
-- The "Test" button on the main page of the "Online Canadian Citizenship Test 2024" block will redirect a user to the test page when clicked.
+- The "Test" button on the Home page of the "Online Canadian Citizenship Test 2024" block will redirect a user to the Test page when clicked.
 - The "Prepare" button on the "Official Study Guide" block will redirect a user to the Prepare page.
 - The Prepare page block includes the "Discover Canada Official Study Guide" and direct links to the official study guide material.
 - By clicking on the About page header link, users will be introduced to the story of the app's creation.
-- By clicking on the "Login" button, a user will be redirected to the login page where an existing user can log in.
-- Clicking on the "Register" button, a user will be redirected to the registration page where they can register by filling in all the required fields.
+- By clicking on the "Login" button, a user will be redirected to the Login page where an existing user can log in.
+- Clicking on the "Register" button, a user will be redirected to the Registration page where they can register by filling in all the required fields.
 
 ### Test
 - The assessment comprises 20 questions spanning diverse categories.
@@ -18,17 +18,20 @@ The Canadian Citizenship Test application serves as an invaluable preparation to
 - After going through all 20 questions or the timer running out after 30 minutes, the test will end.
 - The Test Result page will be displayed, including the number of questions answered correctly and incorrectly, together with the incorrectly answered questions and the incorrect answers made by the user, as well as the correct answers to questions.
 - Below all the test result information are the links to "Discover Canada Study Guide" and "Start The Test Over."
-- The progress bar at the top of the test page will show the test progress in percentages during the assessment.
-- The timer will count down from 30 minutes once the "Start Test" button is clicked.
-- The Questions Counter will count down from 20 questions each time a user clicks on "Submit Answer".
+- The "Progress Bar" at the top of the test page will show the test progress in percentages during the assessment.
+- The "Timer" will count down from 30 minutes once the "Start Test" button is clicked.
+- The "Questions Counter" will count down from 20 questions each time a user clicks on "Submit Answer".
 
 ### Final Product
-![Home-Page](https: "Home")
-![Prepare-Page](https:// "Prepare")
-![About-Page](https:// "About")
-![Test-Page](https:// "Test")
-![Login-Page](https:// "Login")
-![Register-Page](https:// "Register")
+![Home-Page_1](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/home_page_1.png "Home_1")
+![Home-Page_2](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/home_page_2.png "Home_2")
+![Prepare-Page_1](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/prepare_page_1.png "Prepare_1")
+![Prepare-Page_2](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/prepare_page_2.png "Prepare_2")
+![About-Page](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/about_page.png "About")
+![Test-Page_1](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/test_page_1.png "Test_1")
+![Test-Page_2](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/test_page_2.png "Test_2")
+![Login-Page](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/login_page.png "Login")
+![Register-Page](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/registration-page.png "Register")
 ![Test-Result-Page](https:// "Test-Result")
 
 ### Project Setup

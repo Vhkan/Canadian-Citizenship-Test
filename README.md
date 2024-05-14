@@ -1,5 +1,5 @@
 # 🍁Canadian Citizenship Test🍁
-The Canadian Citizenship Test application serves as an invaluable preparation tool for the Official Canadian Citizenship Test. This platform provides easy access to the official Discovery Canada Study Guide material alongside a comprehensive assessment module. 
+The Canadian Citizenship Test application serves as an invaluable preparation tool for the Official Canadian Citizenship Test. This platform provides easy access to the official Discovery Canada Study Guide material alongside a comprehensive assessment module. The application is responsive for both mobile and tablet devices.
 
 ### Application Features
 - The application's Home page contains the introductory information about the application.
@@ -33,7 +33,7 @@ The Canadian Citizenship Test application serves as an invaluable preparation to
 ![Login-Page](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/login_page.png "Login")
 ![Register-Page](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/registration-page.png "Register")
 ![Test-Result-Page](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/results_page.png "Test-Result")
-![Main-Mobile-Page](https://https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/main_mobile.png "Main-Mobile")
+![Main-Mobile-Page](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/main_mobile.png "Main-Mobile")
 ![Prepare-Mobile-Page](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/prapare_mobile.png "Prepare-Mobile")
 ![Test-Mobile-Page](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/test_mobile.png "Test-Mobile")
 

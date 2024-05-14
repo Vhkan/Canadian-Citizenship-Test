@@ -29,7 +29,7 @@ The Canadian Citizenship Test application serves as an invaluable preparation to
 ![Prepare-Page_2](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/prepare_page_2.png "Prepare_2")
 ![About-Page](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/about_page.png "About")
 ![Test-Page_1](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/test_page_1.png "Test_1")
-![Test-Page_2](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/test_page_2.png "Test_2")
+![Test-Page_2](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/test-page_3.png "Test_2")
 ![Login-Page](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/login_page.png "Login")
 ![Register-Page](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/registration-page.png "Register")
 ![Test-Result-Page](https://github.com/Vhkan/Canadian-Citizenship-Test/blob/main/documents/results_page.png "Test-Result")
